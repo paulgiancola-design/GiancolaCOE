@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COE Advisor Team — Priorities &amp; Action Items</title>
+  <style>
+    :root {
+      --sf-blue: #0176d3;
+      --sf-blue-dark: #014486;
+      --sf-blue-light: #e8f4fd;
+      --sf-teal: #06a59a;
+      --sf-teal-light: #e0f5f4;
+      --sf-purple: #5867e8;
+      --sf-purple-light: #f0f1fd;
+      --sf-orange: #dd7a01;
+      --sf-orange-light: #fff3e0;
+      --sf-green: #2e844a;
+      --sf-green-light: #eaf5ea;
+      --sf-red: #ba0517;
+      --sf-red-light: #fdf0f0;
+      --sf-gray-1: #f3f3f3;
+      --sf-gray-2: #dddbda;
+      --sf-gray-3: #706e6b;
+      --sf-text: #181818;
+      --sf-white: #ffffff;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--sf-text);
+      background: var(--sf-gray-1);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--sf-blue-dark) 0%, var(--sf-blue) 100%);
+      color: var(--sf-white);
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-block;
+      background: var(--sf-teal);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    header p.subtitle { font-size: 1.05rem; opacity: 0.85; }
+    header .meta { margin-top: 16px; font-size: 0.9rem; opacity: 0.75; }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .section {
+      background: var(--sf-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--sf-blue-dark);
+      border-bottom: 2px solid var(--sf-blue-light);
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section h2 .icon { font-size: 1.1rem; }
+    .section h3 { font-size: 1rem; font-weight: 700; color: var(--sf-blue); margin: 20px 0 8px; }
+    .section p { margin-bottom: 10px; font-size: 0.95rem; }
+
+    ul { padding-left: 20px; margin-bottom: 10px; }
+    ul li { font-size: 0.95rem; margin-bottom: 5px; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin: 2px 2px 2px 0;
+      vertical-align: middle;
+    }
+
+    .tag.blue { background: var(--sf-blue-light); color: var(--sf-blue-dark); }
+    .tag.teal { background: var(--sf-teal-light); color: #04837b; }
+    .tag.orange { background: var(--sf-orange-light); color: #c45500; }
+    .tag.green { background: var(--sf-green-light); color: var(--sf-green); }
+    .tag.red { background: var(--sf-red-light); color: var(--sf-red); }
+    .tag.purple { background: var(--sf-purple-light); color: var(--sf-purple); }
+
+    .highlight-box {
+      border-left: 4px solid var(--sf-blue);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-size: 0.92rem;
+    }
+
+    .highlight-box.blue { background: var(--sf-blue-light); border-left-color: var(--sf-blue); }
+    .highlight-box.teal { background: var(--sf-teal-light); border-left-color: var(--sf-teal); }
+    .highlight-box.orange { background: var(--sf-orange-light); border-left-color: var(--sf-orange); }
+    .highlight-box.green { background: var(--sf-green-light); border-left-color: var(--sf-green); }
+    .highlight-box.purple { background: var(--sf-purple-light); border-left-color: var(--sf-purple); }
+
+    /* Principles grid */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .principle-card {
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      border-top: 4px solid var(--sf-blue);
+    }
+
+    .principle-card.blue { background: var(--sf-blue-light); border-top-color: var(--sf-blue); }
+    .principle-card.teal { background: var(--sf-teal-light); border-top-color: var(--sf-teal); }
+    .principle-card.purple { background: var(--sf-purple-light); border-top-color: var(--sf-purple); }
+    .principle-card.orange { background: var(--sf-orange-light); border-top-color: var(--sf-orange); }
+    .principle-card.green { background: var(--sf-green-light); border-top-color: var(--sf-green); }
+
+    .principle-card .number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--sf-blue-dark);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .principle-card.teal .number { color: #04837b; }
+    .principle-card.purple .number { color: var(--sf-purple); }
+    .principle-card.orange .number { color: var(--sf-orange); }
+    .principle-card.green .number { color: var(--sf-green); }
+
+    .principle-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--sf-blue-dark);
+      margin-bottom: 6px;
+    }
+
+    .principle-card.teal h4 { color: #04837b; }
+    .principle-card.purple h4 { color: var(--sf-purple); }
+    .principle-card.orange h4 { color: #c45500; }
+    .principle-card.green h4 { color: var(--sf-green); }
+
+    .principle-card p { font-size: 0.88rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* Priority items */
+    .priority-list { list-style: none; padding: 0; }
+    .priority-list li {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--sf-gray-2);
+      font-size: 0.93rem;
+    }
+    .priority-list li:last-child { border-bottom: none; }
+    .priority-list .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .priority-list .content { flex: 1; }
+    .priority-list .content strong { display: block; margin-bottom: 2px; }
+    .priority-list .content .detail { color: var(--sf-gray-3); font-size: 0.88rem; }
+
+    /* Action items table */
+    .action-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .action-table th {
+      background: var(--sf-blue);
+      color: #fff;
+      text-align: left;
+      padding: 8px 12px;
+      font-weight: 600;
+    }
+
+    .action-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--sf-gray-2);
+      vertical-align: top;
+    }
+
+    .action-table tr:last-child td { border-bottom: none; }
+    .action-table tr:nth-child(even) td { background: var(--sf-blue-light); }
+
+    .action-table td.owner {
+      font-weight: 600;
+      color: var(--sf-blue-dark);
+      white-space: nowrap;
+      width: 180px;
+    }
+
+    .action-table td.day {
+      color: var(--sf-gray-3);
+      font-size: 0.82rem;
+      white-space: nowrap;
+      width: 60px;
+    }
+
+    /* Decisions grid */
+    .decisions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .decision-item {
+      background: var(--sf-gray-1);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      display: flex;
+      gap: 8px;
+    }
+
+    .decision-item .check { flex-shrink: 0; margin-top: 1px; color: var(--sf-green); font-size: 1rem; }
+    .decision-item .pending { flex-shrink: 0; margin-top: 1px; color: var(--sf-orange); font-size: 1rem; }
+    .decision-item .text strong { display: block; font-weight: 600; color: var(--sf-text); margin-bottom: 2px; }
+    .decision-item .text span { color: var(--sf-gray-3); }
+
+    /* Source note */
+    .source-note {
+      font-size: 0.8rem;
+      color: var(--sf-gray-3);
+      font-style: italic;
+      margin-top: 6px;
+    }
+
+    /* Agent status table */
+    .agent-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 8px;
+    }
+
+    .agent-table th {
+      background: var(--sf-blue-dark);
+      color: #fff;
+      text-align: left;
+      padding: 8px 12px;
+      font-weight: 600;
+    }
+
+    .agent-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--sf-gray-2);
+      vertical-align: top;
+    }
+
+    .agent-table tr:last-child td { border-bottom: none; }
+    .agent-table tr:nth-child(even) td { background: var(--sf-gray-1); }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--sf-gray-2);
+      margin-top: 4px;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--sf-teal);
+    }
+    .progress-fill.done { background: var(--sf-green); }
+    .progress-fill.warn { background: var(--sf-orange); }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--sf-gray-3);
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .section { padding: 20px 16px; }
+      .action-table td.owner { width: auto; }
+      .action-table td.day { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Global PS COE — Advisory Team Review</div>
+  <h1>COE Advisor Team — Priorities &amp; Action Items</h1>
+  <p class="subtitle">Kedar's Team Offsite · New York Tower · June 1–2, 2026</p>
+  <p class="meta">Synthesized from Day 1 &amp; Day 2 Gemini Meeting Notes</p>
+</header>
+
+<div class="container">
+
+  <!-- Executive Summary -->
+  <div class="section">
+    <h2><span class="icon">📋</span> Executive Summary</h2>
+    <p>The two-day New York offsite crystallized the PS COE's strategic direction: a complete transformation from traditional Professional Services into an AI-native <strong>Agentic Services</strong> organization. Three major thrusts dominate the agenda — scaling Quantum Leap to 25 global customers, launching the Salesforce Enterprise Agentic Platform (SEAP/Super Agent) by June 12, and building the operating model and governance that makes both scalable without dependency on any individual.</p>
+    <div class="highlight-box blue">
+      <strong>The defining bet:</strong> A PS team of 5 delivers like a team of 20. From SOW to deployed code — what used to take weeks, completed in one session. The COE's role is to prove it, measure it, and scale it before Laulima (mid-August).
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin-top:16px;">
+      <div style="background:var(--sf-blue-light); border-radius:var(--radius); padding:14px; text-align:center;">
+        <div style="font-size:1.6rem; font-weight:800; color:var(--sf-blue-dark);">25</div>
+        <div style="font-size:0.82rem; color:var(--sf-gray-3);">Quantum Leap Pilot Customers</div>
+      </div>
+      <div style="background:var(--sf-teal-light); border-radius:var(--radius); padding:14px; text-align:center;">
+        <div style="font-size:1.6rem; font-weight:800; color:#04837b;">9</div>
+        <div style="font-size:0.82rem; color:var(--sf-gray-3);">SEAP Specialist Agents · 16 Clouds</div>
+      </div>
+      <div style="background:var(--sf-green-light); border-radius:var(--radius); padding:14px; text-align:center;">
+        <div style="font-size:1.6rem; font-weight:800; color:var(--sf-green);">62%</div>
+        <div style="font-size:0.82rem; color:var(--sf-gray-3);">Time Savings — Day One Agent (Beta)</div>
+      </div>
+      <div style="background:var(--sf-orange-light); border-radius:var(--radius); padding:14px; text-align:center;">
+        <div style="font-size:1.6rem; font-weight:800; color:#c45500;">50–70%</div>
+        <div style="font-size:0.82rem; color:var(--sf-gray-3);">Time-to-Value Reduction Target (QL)</div>
+      </div>
+      <div style="background:var(--sf-purple-light); border-radius:var(--radius); padding:14px; text-align:center;">
+        <div style="font-size:1.6rem; font-weight:800; color:var(--sf-purple);">4x</div>
+        <div style="font-size:0.82rem; color:var(--sf-gray-3);">AI Token Increase (178B → 787B)</div>
+      </div>
+      <div style="background:var(--sf-gray-1); border-radius:var(--radius); padding:14px; text-align:center;">
+        <div style="font-size:1.6rem; font-weight:800; color:var(--sf-blue-dark);">74%</div>
+        <div style="font-size:0.82rem; color:var(--sf-gray-3);">TechCon AI-Assisted Coding MAU (May)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Operating Principles -->
+  <div class="section">
+    <h2><span class="icon">🧭</span> Operating Principles</h2>
+    <p class="source-note">Formally decided — Day 1</p>
+
+    <h3>COE Operating Principles</h3>
+    <div class="principles-grid">
+      <div class="principle-card blue">
+        <div class="number">01</div>
+        <h4>Field-First Perspective</h4>
+        <p>Prioritize the field and lab perspective in all COE decisions. What works for the people doing the work is the only thing that matters.</p>
+      </div>
+      <div class="principle-card teal">
+        <div class="number">02</div>
+        <h4>Premium Customer Experience</h4>
+        <p>Improve daily tasks to drive adoption. The experience practitioners have with COE tools and content directly maps to the customer experience.</p>
+      </div>
+      <div class="principle-card purple">
+        <div class="number">03</div>
+        <h4>Outcome Certainty</h4>
+        <p>Confidence in projections and estimates. When we say something will happen, it happens — backed by data, baselines, and honest risk tracking.</p>
+      </div>
+    </div>
+
+    <h3>Solutioning COE Non-Negotiables</h3>
+    <div class="principles-grid">
+      <div class="principle-card blue">
+        <div class="number">1</div>
+        <h4>Human Judgment</h4>
+        <p>AI accelerates; humans decide. Every agent output requires human validation before action. No human-in-the-loop is not an option.</p>
+      </div>
+      <div class="principle-card teal">
+        <div class="number">2</div>
+        <h4>Trust is the Product</h4>
+        <p>No customer data leaves the platform. Security, compliance, and auditability are non-negotiable features — not afterthoughts.</p>
+      </div>
+      <div class="principle-card orange">
+        <div class="number">3</div>
+        <h4>Quality + Speed Together</h4>
+        <p>Time acceleration cannot compromise delivery standards. We measure both — and hold the line on both.</p>
+      </div>
+      <div class="principle-card green">
+        <div class="number">4</div>
+        <h4>Learn from Every Engagement</h4>
+        <p>Baseline metrics captured on every monthly engagement. Every pilot feeds the model. The agent gets smarter; so does the team.</p>
+      </div>
+    </div>
+
+    <h3>Governance Philosophy</h3>
+    <div class="highlight-box teal">
+      <strong>"Hold On, Loosely"</strong> — Too much control = Bureaucracy. Too much freedom = Chaos. <strong>Governed Autonomy = Scale.</strong> Teams innovate organically within guardrails; leadership invests in what works and deprecates what doesn't.
+    </div>
+    <div class="highlight-box orange">
+      <strong>"Good Enough and Impact" over Perfection</strong> — Adopted as a strategic principle for agent development. Ship, learn, iterate. Speed of learning is a competitive advantage.
+    </div>
+  </div>
+
+  <!-- Top Priorities -->
+  <div class="section">
+    <h2><span class="icon">🎯</span> Top Priorities for the COE Advisor Team</h2>
+
+    <h3>Immediate (Now — Laulima, mid-August)</h3>
+    <ul class="priority-list">
+      <li>
+        <span class="icon">🚀</span>
+        <div class="content">
+          <strong>SEAP / Super Agent Launch — June 12 <span class="tag orange">Hard Deadline</span></strong>
+          <span class="detail">Salesforce Enterprise Agentic Platform: 9 specialist agents, 16 cloud KBs, 100+ PS users deployed. Pending AI Council approval and AWS production environment (ETA June 8). Broker any blockers immediately.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">⚡</span>
+        <div class="content">
+          <strong>Quantum Leap Pilot Operationalization — 25 Customers <span class="tag blue">In Progress</span></strong>
+          <span class="detail">Four workstreams stood up: Tools, Methodology/Governance, Tracking &amp; Productivity, Pilot Management. Standardize intake, onboarding, and cohort-level communications before Wave 1 projects kick off.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">📊</span>
+        <div class="content">
+          <strong>Baseline Metrics — Capture Before, Not After <span class="tag red">Gap</span></strong>
+          <span class="detail">13 pilot customers already left the happy path. Root cause analysis required. Every QL project needs dual baselines: Traditional (Guided Scoping) vs. QL AI estimate. Mandate phase task creation in PSA now.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">🤖</span>
+        <div class="content">
+          <strong>Field-Ready Agent Package Distribution — before July 4 weekend <span class="tag orange">Action Required</span></strong>
+          <span class="detail">Tiffany packages all field-ready demos. Brand ambassadors present to all GEO leaders and their reports. Cohort-level Slack channel strategy in place. Avoid geo-specific silos.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">🏗️</span>
+        <div class="content">
+          <strong>Agentic UI / "Agentic Window" Design Alignment <span class="tag red">Needs Decision</span></strong>
+          <span class="detail">Kedar + Joan + Joseph must meet to define a unified agentic experience design/wrapper. Agents need an overarching design lens for how they interact with their environments — consistent with how teams prefer to work.</span>
+        </div>
+      </li>
+    </ul>
+
+    <h3>Near-Term (June — Laulima)</h3>
+    <ul class="priority-list">
+      <li>
+        <span class="icon">🌍</span>
+        <div class="content">
+          <strong>APAC &amp; Europe Leads Hiring (under Nate) <span class="tag blue">Hiring Active</span></strong>
+          <span class="detail">Global scale requires in-geo leadership. Nate to document the scaling model defining accountabilities for methodology, tools, productivity, and assets for regional implementation.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">🔬</span>
+        <div class="content">
+          <strong>Life Sciences Practice Activation — Cahba Kingwood (SVP) <span class="tag teal">New Initiative</span></strong>
+          <span class="detail">Top 30 Life Sciences accounts. PS mandated for top 50 pharma clients. Cahba collaborating with Cheryl Satroni, Ian Gross, Cherish Chambers, and COE. Schedule 1:1s to align on methodology and tools.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">🔄</span>
+        <div class="content">
+          <strong>Rebrand to "Agentic Services" <span class="tag purple">Strategic Decision Made</span></strong>
+          <span class="detail">Professional Services → Agentic Services (or Agentic Delivery Services). Aligned. Requires marketing stories, internal vision, and comms plan. Jeff Aschkinasi to deliver unified customer-facing and internal FAQs.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">🏢</span>
+        <div class="content">
+          <strong>Global Migration Organization Ramp — 19 Hires by End of July <span class="tag green">Budget Approved</span></strong>
+          <span class="detail">Focus: Marketing Cloud, Revenue Cloud, Tableau. Asset-based, accelerator-driven. GMO owns migration-to-production-ready; local delivery teams own final implementation. Partner alliances policy open.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">🧩</span>
+        <div class="content">
+          <strong>Center of Excellence Formalization <span class="tag blue">Action Required</span></strong>
+          <span class="detail">Establish loose roles/responsibilities + single POC per OU. Not a rigid bureaucracy — a coordination layer. Nate leads. Must not create siloed operations.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">💼</span>
+        <div class="content">
+          <strong>PSU Deal Insights Engine Field Rollout <span class="tag teal">Field Ready</span></strong>
+          <span class="detail">AI-powered PSU recommendations via Slack. Teddy presents PSU strategy at Chicago meeting. Integrate ARI Program into Migration intake process.</span>
+        </div>
+      </li>
+    </ul>
+
+    <h3>Strategic (FY27 Horizon)</h3>
+    <ul class="priority-list">
+      <li>
+        <span class="icon">💰</span>
+        <div class="content">
+          <strong>AI Monetization Strategy <span class="tag red">Needs Further Discussion</span></strong>
+          <span class="detail">AI burden rates vs. transaction-based pricing vs. outcomes-based billing — no consensus reached. Token usage and cost tracking mandated as a baseline data point. Avoid "race to the bottom" on rates.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">🎓</span>
+        <div class="content">
+          <strong>1,000 College Graduate Hiring Plan <span class="tag green">Approved</span></strong>
+          <span class="detail">Aligned with broader company hiring initiative for Professional Services. Tiffany to maintain a priority "hot list" of immediate headcount needs.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">📐</span>
+        <div class="content">
+          <strong>Trust 360 Expansion — Data Cloud + Agentforce (Coming Soon) <span class="tag blue">Roadmap</span></strong>
+          <span class="detail">Security pillar GA now. Data Cloud and Agentforce pillars on roadmap. Health 360 generated $69M pipeline + $1.6M iACV in FY27Q1. Integrate into Day One delivery methodology.</span>
+        </div>
+      </li>
+      <li>
+        <span class="icon">📈</span>
+        <div class="content">
+          <strong>ADLC Pilot Documentation — One Project, Full End-to-End <span class="tag orange">Action Required</span></strong>
+          <span class="detail">Nate + team to select one specific project for full ADLC documentation. Replaces SDLC: intent-based, continuous refinement, probabilistic testing. This becomes the pattern for all future QL delivery.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Agent Status -->
+  <div class="section">
+    <h2><span class="icon">🤖</span> COE Agent Status Overview</h2>
+    <p class="source-note">Source: Day 2 Delivery Governance Agent Status Review</p>
+    <table class="agent-table">
+      <thead>
+        <tr>
+          <th>Agent</th>
+          <th>Owner</th>
+          <th>Field Ready</th>
+          <th style="width:120px;">Progress</th>
+          <th>Productivity Gain</th>
+          <th>Status / Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Project Margin Variance Analyst</strong></td>
+          <td>Michele Lubeck</td>
+          <td>5/21/2026</td>
+          <td>
+            <div>100%</div>
+            <div class="progress-bar"><div class="progress-fill done" style="width:100%"></div></div>
+          </td>
+          <td>12 hpw (field ~6hp/proj)</td>
+          <td>Live. Link to Project 360 dashboard (Bavan). Identify variance between bid margin and current margin.</td>
+        </tr>
+        <tr>
+          <td><strong>ARI Governance Analyst</strong></td>
+          <td>Michele Lubeck</td>
+          <td>5/29/2026</td>
+          <td>
+            <div>99%</div>
+            <div class="progress-bar"><div class="progress-fill done" style="width:99%"></div></div>
+          </td>
+          <td>4 hpw (field ~1hp)</td>
+          <td>Field testing in progress. Covers ARI delivery governance, governance phases, templates, RYG reporting, FAQs, and support routing.</td>
+        </tr>
+        <tr>
+          <td><strong>Project Manager Guide</strong></td>
+          <td>Stephanie Flasch</td>
+          <td>6/14/2026</td>
+          <td>
+            <div>85%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+          </td>
+          <td>2 hpw (field ~1hp)</td>
+          <td>Guides PM1-role consultants through delivery assurance compliance, governance processes, and project health management via Org62 lookup.</td>
+        </tr>
+        <tr>
+          <td><strong>Quantum Leap Trail Guide</strong></td>
+          <td>Victoria Gailey</td>
+          <td>6/21/2026</td>
+          <td>
+            <div>75%</div>
+            <div class="progress-bar"><div class="progress-fill warn" style="width:75%"></div></div>
+          </td>
+          <td>TBD</td>
+          <td>Guides consultants through QL pilot onboarding: context, MVG alignment, tool consent requirements, work item tracking setup, and next steps. Testing with initial pilot teams.</td>
+        </tr>
+        <tr>
+          <td><strong>Day One Readiness Agent</strong></td>
+          <td>COE / Delivery</td>
+          <td>Live (Beta)</td>
+          <td>
+            <div>~90%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+          </td>
+          <td>62% time savings</td>
+          <td>Consolidates 20+ data sources for sales-to-delivery handoff. Report learnings from every use. Capture baseline metrics on all monthly engagements.</td>
+        </tr>
+        <tr>
+          <td><strong>Services Scoping Agent (GSRM)</strong></td>
+          <td>Rakkesh + Cheryl</td>
+          <td>Live</td>
+          <td>
+            <div>+12.5% YoY</div>
+            <div class="progress-bar"><div class="progress-fill done" style="width:100%"></div></div>
+          </td>
+          <td>830 deal risks generated autonomously in FY27</td>
+          <td>Expanded from 8% → 100% deal coverage. Polished demo video needed. Target 92% of smaller deals. Broader adoption requires GEO leader endorsement.</td>
+        </tr>
+        <tr>
+          <td><strong>Product Implementation Expert Agent</strong></td>
+          <td>Nilotpal (contact)</td>
+          <td>GA Aug 2026</td>
+          <td>
+            <div>Beta (40–50 users)</div>
+            <div class="progress-bar"><div class="progress-fill warn" style="width:65%"></div></div>
+          </td>
+          <td>TBD</td>
+          <td>Self-service PS knowledge interface via Slack/Claude Code/Cursor. Cross-team collaboration with SEAP team initiated. Starting with D360.</td>
+        </tr>
+        <tr>
+          <td><strong>Trust 360 / Health 360</strong></td>
+          <td>David W. / Karishma</td>
+          <td>Security: GA now</td>
+          <td>
+            <div>GA (Security)</div>
+            <div class="progress-bar"><div class="progress-fill done" style="width:100%"></div></div>
+          </td>
+          <td>$69M pipeline (FY27Q1)</td>
+          <td>Headless Slack experience. PDF executive report. Security pillar GA. Data Cloud + Agentforce coming soon. Integrate into Day One methodology.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Action Items -->
+  <div class="section">
+    <h2><span class="icon">✅</span> Action Items by Owner</h2>
+    <p class="source-note">Combined from Day 1 and Day 2 next steps</p>
+
+    <h3>Leadership &amp; COE Core Team</h3>
+    <table class="action-table">
+      <thead><tr><th>Owner</th><th>Action Item</th><th>Day</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="owner">Kedar, Joan, Joseph</td>
+          <td>Meet to define unified agentic experience design/wrapper — the "agentic window" across all agents</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">Nate + Kedar</td>
+          <td>Coordinate with Daniel and Matt to define method for managing QL agents and productivity</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">David + Nate</td>
+          <td>Align on OU strategy and field engagement model</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">Joe, Joseph, Joan</td>
+          <td>Define Lyma/Laulima reporting strategy and challenge current QL tracking metrics — are they measuring the right things?</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">The Group</td>
+          <td>Analyze root cause: why did 13 pilot customers leave the happy path?</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">The Group</td>
+          <td>Update all demo presentations to include explicit human-in-the-loop validation callouts</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">The Group</td>
+          <td>Highlight business impact and value prop statements (time savings, quality improvements) in all presentation materials</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">The Group</td>
+          <td>Schedule 1:1s with Cahba to explain current org work and methodology (Life Sciences activation)</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">The Group</td>
+          <td>Share competitive insights gathered from partner organizations with the broader team</td>
+          <td class="day">Day 2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Nate</h3>
+    <table class="action-table">
+      <thead><tr><th>Owner</th><th>Action Item</th><th>Day</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="owner">Nate</td>
+          <td>Select one specific project for full ADLC pilot documentation (end-to-end pattern)</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">Nate</td>
+          <td>Document scaling model for QL: define accountabilities for methodology, tools, productivity, and assets for regional implementation</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Nate</td>
+          <td>Centralize pilot resources: design hub for pilot management info, baseline tooling onboarding, and cohort-level status tracking</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Nate</td>
+          <td>Develop organizational design strategy and share implementation plan with team; identify OU POCs for COE</td>
+          <td class="day">Day 2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tiffany</h3>
+    <table class="action-table">
+      <thead><tr><th>Owner</th><th>Action Item</th><th>Day</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="owner">Tiffany</td>
+          <td>Create standard catalog naming conventions for agents (pilot / proof / project / program designations)</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">Tiffany</td>
+          <td>Consolidate all QL project methods, tools, onboarding, and governance documents into one central portal (under Nate)</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Tiffany</td>
+          <td>Package all field-ready demos into a single package for distribution to global GEO leaders</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Tiffany</td>
+          <td>Create priority hiring "hot list" for immediate recruitment; coordinate with hiring team</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Lori + Tiffany</td>
+          <td>Adjust schedule based on brainstorming session outcomes</td>
+          <td class="day">Day 2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Joseph, Joe, Stephanie</h3>
+    <table class="action-table">
+      <thead><tr><th>Owner</th><th>Action Item</th><th>Day</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="owner">Joseph</td>
+          <td>Design sharable Enterprise Agentic Architecture hub — a unified interface for PS leaders showing the full agentic landscape</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Joseph, Joe, Steph, Tiffany</td>
+          <td>Define consistent agent cataloging guidelines and naming conventions (pilot / proof / project / program)</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Stephanie + Michelle Lubec</td>
+          <td>Define rollout strategy for distributing agentic skills to the field</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Stephanie</td>
+          <td>Include Alex Killow in consulting delivery persona journey mapping initiative</td>
+          <td class="day">Day 2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Nilotpal &amp; Enterprise Security</h3>
+    <table class="action-table">
+      <thead><tr><th>Owner</th><th>Action Item</th><th>Day</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="owner">Nilotpal</td>
+          <td>Share SEAP presentation deck with all participants for review</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Nilotpal</td>
+          <td>Post in Secure 2 channel to solicit nominations for SEAP agent testing</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Nilotpal</td>
+          <td>Share comprehensive SEAP architecture documentation with team</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Nilotpal + Stephanie</td>
+          <td>Integrate Minimum Viable Governance (MVG) and standard templates into the SEAP platform</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Enterprise Security Team</td>
+          <td>Execute penetration tests on SEAP GitHub integration — enterprise-level security required before broad rollout</td>
+          <td class="day">Day 2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Teddy, Rakkesh, Cheryl, Bavan</h3>
+    <table class="action-table">
+      <thead><tr><th>Owner</th><th>Action Item</th><th>Day</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="owner">Teddy</td>
+          <td>Consolidate role feedback from Neil / Joan / Tamil / Joseph on future on-the-ground support roles</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">Teddy</td>
+          <td>Present Professional Services Units (PSU) concept at Chicago meeting</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Rakkesh + Cheryl</td>
+          <td>Create polished demo video of GSRM Risk Scoping capability for field distribution</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">Cheryl Stevens</td>
+          <td>Ensure baseline metrics are captured for every monthly engagement — no exceptions</td>
+          <td class="day">Day 1</td>
+        </tr>
+        <tr>
+          <td class="owner">Bavan Sathianathan</td>
+          <td>Integrate Project Margin Variance skill into the Project 360 dashboard for centralized access</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Chris + Bavan</td>
+          <td>Communicate dashboard release milestones to leadership on a monthly basis</td>
+          <td class="day">Day 2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Jeff Aschkinasi &amp; Communications</h3>
+    <table class="action-table">
+      <thead><tr><th>Owner</th><th>Action Item</th><th>Day</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="owner">Jeff Aschkinasi</td>
+          <td>Develop unified set of customer-facing AND internal-facing FAQs (for Agentic Services rebrand + QL rollout)</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Team</td>
+          <td>Deploy brand ambassadors to present field-ready demo packages to all GEO leaders and reports — before July 4th weekend</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Team</td>
+          <td>Mandate GPS Jira usage for work item tracking across all pilot projects; establish exception process</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Team</td>
+          <td>Implement telemetry collection in all internal tools — stop relying on Google surveys for adoption tracking</td>
+          <td class="day">Day 2</td>
+        </tr>
+        <tr>
+          <td class="owner">Team</td>
+          <td>Build integrated agent Q&amp;A support system — archive and store project Q&amp;A for scalability (integrate into pilot portal)</td>
+          <td class="day">Day 2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Key Decisions Made -->
+  <div class="section">
+    <h2><span class="icon">⚖️</span> Key Decisions Made</h2>
+
+    <h3>Aligned — Day 2</h3>
+    <div class="decisions-grid">
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>Rename to "Agentic Services"</strong>
+          <span>Professional Services rebranded to Agentic Services / Agentic Delivery Services to unify identity and align with market.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>4 QL Workstreams Established</strong>
+          <span>Tools · Methodology/Governance · Tracking &amp; Productivity · Pilot Management. Each with a designated captain.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>Headless (Slack-First) Interaction Model</strong>
+          <span>Future strategic direction for all agent access. Users interact via Slack, not confined to Org interfaces.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>Staff Compensation + Utilization Protection</strong>
+          <span>Approved for team members building agents full-time. Not penalized for utilization — they are mission-critical.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>PSU Strategy Confirmed</strong>
+          <span>Professional Services Units model maintained for work units — consistent with Chicago model, despite current Org62 limitations.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>Avoid AI Tool Duplication</strong>
+          <span>Integrate existing Salesforce AI agents into current systems rather than creating duplicative tools.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>Migration Responsibility Model</strong>
+          <span>GMO owns migration to production-ready state. Local delivery teams own final customer implementation.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>3 Productivity Metrics Mandated</strong>
+          <span>Sales cycle duration · Project estimates (Traditional vs. QL baselines) · Actual hours by project phase.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>GPS Jira Mandated</strong>
+          <span>All pilot projects must use GPS Jira for work tracking. Exception process for teams with customer-specific tools.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>College Graduate Hiring — 1,000 PS Hires</strong>
+          <span>Aligned with broader company initiative. Tiffany manages priority hot list for immediate needs.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>SEAP Super Agent Demo to Lori</strong>
+          <span>Include Super Agent demo in Lori presentation. Focus on proof of value, not proof of technology.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="check">✅</span>
+        <div class="text">
+          <strong>Token Usage &amp; Cost Tracking Mandated</strong>
+          <span>Track token usage and cost as a standard data point, independent of ROI calculations.</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Needs Further Discussion</h3>
+    <div class="decisions-grid">
+      <div class="decision-item">
+        <span class="pending">⏳</span>
+        <div class="text">
+          <strong>AI Monetization Strategy</strong>
+          <span>AI burden rates vs. transaction-based pricing — no consensus. Test outcomes-based mindsets, but avoid racing to the bottom on rates.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="pending">⏳</span>
+        <div class="text">
+          <strong>Defect Ratio Definitions</strong>
+          <span>Are traditional defect ratios valid in iterative, agentic work cycles? Requires further alignment before mandating in QL tracking.</span>
+        </div>
+      </div>
+      <div class="decision-item">
+        <span class="pending">⏳</span>
+        <div class="text">
+          <strong>Program Support Model Design</strong>
+          <span>Organizational design and support model for program management not yet fully documented or finalized.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Initiatives Deep Dive -->
+  <div class="section">
+    <h2><span class="icon">🔬</span> Key Initiatives — What the COE Needs to Know</h2>
+
+    <h3>Salesforce Enterprise Agentic Platform (SEAP)</h3>
+    <div class="highlight-box blue">
+      <strong>9 Specialist Agents · 16 Cloud KBs · 100+ PS Users · 8 ADLC Stages · 70+ SOW Features Parsed</strong><br/>
+      Built on 4 pillars: Experience · Delivery · Intelligence · Context. Full trust layer: LLM Express Gateway, Prompt Injection Defense, Zero Client-Side Secrets, AI Council Review, Human-in-the-Loop Gates. Powered by Claude + Einstein + Agentforce + Headless 360.
+    </div>
+    <ul>
+      <li><strong>Launch timeline:</strong> OU AI Coaches (June 5), Delivery Teams (June 15) — pending AI Council approval + AWS production environment (ETA June 8)</li>
+      <li><strong>R2 roadmap:</strong> 3P Agent Orchestration (MCP+A2A) · CI/CD Pipeline · VS Code Extension · Scale to 3,000+ Users · Curated Memory</li>
+      <li><strong>Key use case:</strong> 50-page SOW → production-ready Apex, metadata, and test scripts in 2 weeks. End-to-end ADLC proven.</li>
+    </ul>
+
+    <h3>Quantum Leap — 4 Workstreams</h3>
+    <ul>
+      <li><strong>Tools:</strong> 6-step intake process (Submission → Triage → Cross-Functional Eval → Sign-off → Safe Launch → Continuous Oversight). 56 tools identified; only 3 have formal process today.</li>
+      <li><strong>Methodology/Governance:</strong> Minimum Viable Governance (MVG) per project phase. Gate criteria for every phase. Digital interface tracking progress through phases + phase-specific agent access.</li>
+      <li><strong>Tracking &amp; Productivity:</strong> 4 metrics — Pre-Sales Duration by Stage · Project Estimates (3 baselines) · Work Item Throughput · Token Usage &amp; Cost. Sources: Org62, GPS Jira, Scopezilla, Guided Scoping, Snowflake.</li>
+      <li><strong>Pilot Management:</strong> Cohort lifecycle — baseline tooling provisioning → lab training → project-specific execution. Centralized hub. Cohort-level Slack channels (no geo silos).</li>
+    </ul>
+
+    <h3>Global Migration Organization</h3>
+    <div class="highlight-box teal">
+      <strong>3x TCO</strong> in attrition saved · <strong>80% reduction</strong> in manual migration efforts · <strong>20</strong> GMO Lighthouse customer stories. Focus: Marketing Cloud (Kevin Siminski), Revenue Cloud (Sam Chung), Tableau (Southard Jones). Intake Prerequisite: <em>No engagement without identified, validated customer outcomes.</em>
+    </div>
+    <ul>
+      <li>Asset-based / accelerator-based model: GMO owns migration-to-production-ready; OU/Partners own relationship and transformation</li>
+      <li>19 Wave 1 hires approved — finalize by end of July. Roadshow schedule in June–July. FY27 industrialization from August.</li>
+      <li>ARI Program to be integrated into migration intake process</li>
+    </ul>
+
+    <h3>Informatica PS Integration</h3>
+    <ul>
+      <li>350 FTE / $60M · Outcome-based delivery via PSU model. "Hold On, Loosely" governance: 50+ AI ideas submitted in one week.</li>
+      <li>Currently operating in separate Salesforce org (no Org62 access). August 2026 milestone: Org62 migration for new logos and cloud business.</li>
+      <li>PSU Deal Insights Engine: AI analysis of territory data → portfolio view → PSU recommendations via Slack</li>
+    </ul>
+
+    <h3>Trust 360 / Health 360</h3>
+    <ul>
+      <li>High-impact NNAOV engagement targeting stalled &amp; high-attrition-risk accounts. Under 4 hours to run. 18% conversion rate. $314K average pipe per scan.</li>
+      <li>FY27Q1: 329 accounts scanned → $69M pipeline → $1.6M iACV across TMT CMRCL, PACE CMRCL, FINS, Global SMB, Canada, CBS CMRCL</li>
+      <li>Unique differentiator: platform runtime telemetry + CoE security blueprints + case data correlation (evidence-based, not opinion)</li>
+      <li>Headless Slack experience → PDF executive report covering Security · Code Quality · Data Model · Agentforce · Automation</li>
+    </ul>
+  </div>
+
+  <!-- Metrics to Watch -->
+  <div class="section">
+    <h2><span class="icon">📊</span> Metrics to Watch</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px;">
+      <div style="background:var(--sf-blue-light); border-radius:var(--radius); padding:14px;">
+        <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--sf-blue-dark); margin-bottom:6px;">QL Pilot</div>
+        <div style="font-size:0.9rem;">Pre-Sales Duration by Stage · 3 Project Estimate Baselines · Work Items per FTE per Week · Token $ per Phase</div>
+      </div>
+      <div style="background:var(--sf-teal-light); border-radius:var(--radius); padding:14px;">
+        <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#04837b; margin-bottom:6px;">AI Adoption</div>
+        <div style="font-size:0.9rem;">Token usage (178B → 787B target) · TechCon MAU (74.2% May, target exceeded 8mo early) · AI tool engagement by job family</div>
+      </div>
+      <div style="background:var(--sf-orange-light); border-radius:var(--radius); padding:14px;">
+        <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#c45500; margin-bottom:6px;">Pipeline Impact</div>
+        <div style="font-size:0.9rem;">Trust 360 pipe/scan · ARI deal value protected · GSRM deal coverage % · Day One Agent time savings per handoff</div>
+      </div>
+      <div style="background:var(--sf-green-light); border-radius:var(--radius); padding:14px;">
+        <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--sf-green); margin-bottom:6px;">Delivery Quality</div>
+        <div style="font-size:0.9rem;">Project margin variance (bid vs. actual) · Defect ratio (pending definition) · QL happy path retention · CSAT scores</div>
+      </div>
+      <div style="background:var(--sf-purple-light); border-radius:var(--radius); padding:14px;">
+        <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--sf-purple); margin-bottom:6px;">Agentic Readiness Pulse</div>
+        <div style="font-size:0.9rem;">Market readiness (current: ~6/10) · Field accelerator readiness (~6/10) · Agent-build capability (~8/10)</div>
+      </div>
+      <div style="background:var(--sf-gray-1); border-radius:var(--radius); padding:14px;">
+        <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--sf-gray-3); margin-bottom:6px;">Migration</div>
+        <div style="font-size:0.9rem;">TCO returned per migration · Manual effort reduction % · Lighthouse stories created · ARI integration rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="section">
+    <h2><span class="icon">📅</span> Key Upcoming Dates</h2>
+    <table class="action-table">
+      <thead><tr><th style="width:140px;">Date</th><th>Milestone</th><th style="width:200px;">Owner</th></tr></thead>
+      <tbody>
+        <tr><td class="owner">June 5, 2026</td><td>SEAP rollout to OU AI Coaches (APAC 1:30PM AEST · EMEA 4:30PM BST · AMER 9:00AM PDT) + Demo &amp; Office Hours</td><td>Nilotpal</td></tr>
+        <tr><td class="owner">June 8, 2026</td><td>AWS Production Environment provisioning (critical SEAP dependency)</td><td>Enterprise Infra</td></tr>
+        <tr><td class="owner">June 12, 2026</td><td>SEAP / Super Agent full launch to Delivery Teams</td><td>Nilotpal</td></tr>
+        <tr><td class="owner">June 14, 2026</td><td>Project Manager Guide Agent — Field Ready</td><td>Stephanie Flasch</td></tr>
+        <tr><td class="owner">June 21, 2026</td><td>Quantum Leap Trail Guide Agent — Field Ready</td><td>Victoria Gailey</td></tr>
+        <tr><td class="owner">June — July</td><td>Global Migration Organization Wave 1 Launch — 19 hires, finalize customer cohorts, tooling roadmap</td><td>GMO</td></tr>
+        <tr><td class="owner">Before July 4</td><td>Field-ready demo packages distributed to all GEO leaders via brand ambassadors</td><td>Tiffany + Team</td></tr>
+        <tr><td class="owner">Aug 2026</td><td>Informatica Org62 migration for new logos and cloud business</td><td>Neil Burge</td></tr>
+        <tr><td class="owner">Aug 2026</td><td>Product Implementation Expert Agent — GA</td><td>Nilotpal</td></tr>
+        <tr><td class="owner">Laulima (mid-Aug)</td><td>Quantum Leap pilot proof point due — demonstrate 50–70% time-to-value reduction</td><td>Full Team</td></tr>
+        <tr><td class="owner">Week of July 13</td><td>Next in-person team meeting — New York</td><td>Kedar</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  Global PS COE Advisor Team &nbsp;·&nbsp; Kedar's Team Offsite — New York Tower &nbsp;·&nbsp; June 1–2, 2026<br/>
+  Synthesized from Gemini AI meeting notes · Day 1 &amp; Day 2
+</footer>
+
+</body>
+</html>
