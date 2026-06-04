@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global CoE — Ownership Readout</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f5f9;
+      color: #1a1a2e;
+      line-height: 1.65;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 60%, #1a1a2e 100%);
+      color: white;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    header .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.65;
+      margin-bottom: 1.5rem;
+    }
+
+    .sources {
+      display: inline-flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .source-chip {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    /* ── Summary card ── */
+    .summary-card {
+      background: white;
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-left: 5px solid #0f3460;
+    }
+
+    .summary-card h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f3460;
+      margin-bottom: 0.75rem;
+    }
+
+    .summary-card p {
+      font-size: 0.95rem;
+      color: #374151;
+      margin-bottom: 0.6rem;
+    }
+
+    .summary-card p:last-child { margin-bottom: 0; }
+
+    .kpi-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+
+    .kpi {
+      background: #f0f4ff;
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .kpi .num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #0f3460;
+      display: block;
+    }
+
+    .kpi .lbl {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Section / filter bar ── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-bar span {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #6b7280;
+      margin-right: 0.25rem;
+    }
+
+    .filter-btn {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3rem 0.85rem;
+      border-radius: 20px;
+      border: 1.5px solid #d1d5db;
+      background: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: #374151;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #0f3460;
+      color: white;
+      border-color: #0f3460;
+    }
+
+    /* ── Table ── */
+    .table-wrap {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      background: #0f3460;
+      color: white;
+      padding: 0.85rem 1rem;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    thead th:first-child { border-radius: 0; }
+
+    tbody tr {
+      border-bottom: 1px solid #f0f0f5;
+      transition: background 0.1s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f8f9fc; }
+
+    tbody td {
+      padding: 0.85rem 1rem;
+      vertical-align: top;
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.2rem;
+    }
+
+    .item-desc {
+      font-size: 0.82rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    /* Type badges */
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .badge-presales {
+      background: #ede9fe;
+      color: #5b21b6;
+    }
+
+    .badge-delivery {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-both {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    /* Importance bar */
+    .importance-cell {
+      min-width: 130px;
+    }
+
+    .imp-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .imp-critical { color: #dc2626; }
+    .imp-high     { color: #d97706; }
+    .imp-medium   { color: #2563eb; }
+
+    .imp-bar-bg {
+      background: #e5e7eb;
+      border-radius: 4px;
+      height: 6px;
+      overflow: hidden;
+    }
+
+    .imp-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .fill-critical { background: #dc2626; width: 100%; }
+    .fill-high     { background: #d97706; width: 70%; }
+    .fill-medium   { background: #2563eb; width: 40%; }
+
+    .source-tag {
+      display: inline-block;
+      font-size: 0.66rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: #f3f4f6;
+      color: #6b7280;
+      margin: 0.15rem 0.15rem 0 0;
+      font-weight: 500;
+    }
+
+    /* hidden row for JS filter */
+    tr.hidden { display: none; }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      padding: 1rem 0 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Global CoE — Ownership Readout</h1>
+  <p class="subtitle">Items identified for Global CoE ownership across Pre-Sales and Delivery · Compiled 2026-06-04</p>
+  <div class="sources">
+    <span class="source-chip">Kickoff: Global CoE Advisor Team — 2026-06-03</span>
+    <span class="source-chip">Kedar's Team Offsite NY Tower — 2026-06-01</span>
+    <span class="source-chip">GCO Q2 GTM Leadership Summit — 2026-05-05</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Summary ── -->
+  <div class="summary-card">
+    <h2>Executive Summary</h2>
+    <p>
+      Across three leadership meetings, a consistent set of responsibilities surfaced that the Global Center of Excellence must own to realize the organization's agentic ambitions.
+      The team is operating as a <strong>"GIST" nerve system</strong> (Global Insights, Standards &amp; Tools) with a hard deadline to demonstrate progress by <strong>La Lima (mid-August 2026)</strong>.
+    </p>
+    <p>
+      The heaviest concentration of COE ownership sits at the intersection of <strong>Pre-Sales solutioning</strong> (qualifying, scoping, and packaging deals in the Quantum Leap model) and <strong>Delivery governance</strong> (standardizing AI-native tools, methodology, and measurement across all OUs).
+      Four items — Scoping Tool Standardization, Quantum Leap Methodology &amp; Governance, Agentic COE Offering, and Day One Readiness — were cited in every session and carry the greatest business impact.
+    </p>
+    <div class="kpi-row">
+      <div class="kpi"><span class="num">18</span><span class="lbl">Total Items</span></div>
+      <div class="kpi"><span class="num">7</span><span class="lbl">Pre-Sales</span></div>
+      <div class="kpi"><span class="num">7</span><span class="lbl">Delivery</span></div>
+      <div class="kpi"><span class="num">4</span><span class="lbl">Both</span></div>
+      <div class="kpi"><span class="num">6</span><span class="lbl">Critical Priority</span></div>
+    </div>
+  </div>
+
+  <!-- ── Filter bar ── -->
+  <div class="filter-bar">
+    <span>Filter:</span>
+    <button class="filter-btn active" onclick="filterTable('all', this)">All</button>
+    <button class="filter-btn" onclick="filterTable('Pre-Sales', this)">Pre-Sales Only</button>
+    <button class="filter-btn" onclick="filterTable('Delivery', this)">Delivery Only</button>
+    <button class="filter-btn" onclick="filterTable('Both', this)">Both</button>
+    <button class="filter-btn" onclick="filterTable('critical', this)">Critical Priority</button>
+  </div>
+
+  <!-- ── Grid ── -->
+  <div class="table-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Item</th>
+          <th style="width:13%">Type</th>
+          <th style="width:17%">Importance</th>
+          <th style="width:40%">Rationale &amp; Source</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- 1 -->
+        <tr data-type="Both" data-imp="critical">
+          <td>
+            <div class="item-name">Scoping Tool Standardization (Scopezilla / Global Rubric)</div>
+            <div class="item-desc">Evaluate, rank, and federate best-in-class scoping tools across all OUs; establish a global baseline via the 13-point rubric before mid-August.</div>
+          </td>
+          <td><span class="badge badge-both">Pre-Sales + Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-critical">Critical</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
+          </td>
+          <td>
+            Mentioned in all three sessions. Scopezilla selected for Quantum Leap; COE Advisor Kickoff tasked team with evaluating four tools against rubric. Drives both pre-sale estimation accuracy and Day Zero readiness.
+            <br>
+            <span class="source-tag">Advisor Kickoff</span>
+            <span class="source-tag">Kedar Offsite</span>
+            <span class="source-tag">GTM Summit</span>
+          </td>
+        </tr>
+
+        <!-- 2 -->
+        <tr data-type="Both" data-imp="critical">
+          <td>
+            <div class="item-name">Quantum Leap Methodology &amp; Governance Framework</div>
+            <div class="item-desc">Own the AI-native delivery methodology (ADLC), minimal viable governance, and the 30–50% efficiency compression target; integrate MVG artifacts into the flow of work.</div>
+          </td>
+          <td><span class="badge badge-both">Pre-Sales + Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-critical">Critical</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
+          </td>
+          <td>
+            Central agenda item at Kedar Offsite (full day). COE owns methodology, tools, productivity reporting, and solutioning tracks. Target: referenceable customers and validated data by La Lima.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+            <span class="source-tag">GTM Summit</span>
+          </td>
+        </tr>
+
+        <!-- 3 -->
+        <tr data-type="Pre-Sales" data-imp="critical">
+          <td>
+            <div class="item-name">Agentic Salesforce CoE Offering (Tiers 1–3)</div>
+            <div class="item-desc">Package, position, and sell the three-tier Agentic CoE offering — from governance blueprint (T1) through fully Salesforce-run CoE with handover (T3).</div>
+          </td>
+          <td><span class="badge badge-presales">Pre-Sales</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-critical">Critical</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
+          </td>
+          <td>
+            Launched the week following the GTM Summit. Cited as the flagship new GCO offer for Q2. Directly tied to revenue targets and the "agentic consulting firm" mandate from Joel Dubinsky.
+            <br>
+            <span class="source-tag">GTM Summit</span>
+          </td>
+        </tr>
+
+        <!-- 4 -->
+        <tr data-type="Both" data-imp="critical">
+          <td>
+            <div class="item-name">Day One Readiness Agent — Deployment &amp; Adoption</div>
+            <div class="item-desc">Drive global rollout of the Slackbot-generated readiness canvas; own the sales-to-delivery handoff standardization and AgentForce Operations orchestration layer.</div>
+          </td>
+          <td><span class="badge badge-both">Pre-Sales + Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-critical">Critical</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
+          </td>
+          <td>
+            Beta showed 62% time savings; admin hours cut from 8 to 1–3. Mentioned across both offsite sessions. COE owns QA Round 2, deploy, and adoption push to eliminate the standardization gap at handoff.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+            <span class="source-tag">Advisor Kickoff</span>
+          </td>
+        </tr>
+
+        <!-- 5 -->
+        <tr data-type="Both" data-imp="critical">
+          <td>
+            <div class="item-name">Global Tool Inventory &amp; Governance (Catalog + Deprecation)</div>
+            <div class="item-desc">Create and maintain the living inventory of all PS tools; define naming conventions, scaling vs. deprecation criteria, and the "governed autonomy" model for tool proliferation.</div>
+          </td>
+          <td><span class="badge badge-both">Pre-Sales + Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-critical">Critical</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
+          </td>
+          <td>
+            Cited as a core GIST mandate (Global Insights, Standards &amp; Tools). Joanie's remit in the Advisor Kickoff; Tiffany assigned naming conventions at Kedar Offsite. New tools emerge every two weeks — governance is existential.
+            <br>
+            <span class="source-tag">Advisor Kickoff</span>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 6 -->
+        <tr data-type="Delivery" data-imp="critical">
+          <td>
+            <div class="item-name">Productivity Reporting &amp; Deal Velocity Metrics</div>
+            <div class="item-desc">Define and own the dashboards that track Quantum Leap acceleration vs. traditional baselines; measure stage 2→4 deal velocity and consultant time savings systematically.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-critical">Critical</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
+          </td>
+          <td>
+            Joe/Joseph/Joan assigned as reporting trio at Kedar Offsite. Must produce referenceable data by La Lima. Without this, the organization cannot validate the agentic model to leadership or investors.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 7 -->
+        <tr data-type="Pre-Sales" data-imp="high">
+          <td>
+            <div class="item-name">Quantum Leap Solutioning Process (3-Week CoE Sprint)</div>
+            <div class="item-desc">Own the "front door" qualification framework (9-dimension intake score), micro-demo workflow, and DA→IA handoff package; reduce pre-sale cycle time by ~80%.</div>
+          </td>
+          <td><span class="badge badge-presales">Pre-Sales</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-high">High</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
+          </td>
+          <td>
+            Detailed solutioning framework presented at Kedar Offsite. "Solutioning CoE" explicitly named as owner. Penn State is the first live deal; 20+ pilot nominations already evaluated.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 8 -->
+        <tr data-type="Pre-Sales" data-imp="high">
+          <td>
+            <div class="item-name">Customer Readiness &amp; QL Qualification Scoring</div>
+            <div class="item-desc">Maintain and evolve the 9-dimension Quantum Leap fit-signal framework; segment customers into cohorts (Deliver Now / Deliver Soon / Support Scoping / Deferred).</div>
+          </td>
+          <td><span class="badge badge-presales">Pre-Sales</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-high">High</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
+          </td>
+          <td>
+            Qualification tracker (Quantum Leap Tracker app) shown at Kedar Offsite with 24/31/36 customer cohorts. COE owns the criteria, scoring rubric, and cohort management globally.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 9 -->
+        <tr data-type="Delivery" data-imp="high">
+          <td>
+            <div class="item-name">AI Control Plane Architecture &amp; MCP Governance</div>
+            <div class="item-desc">Design and own the PS AI Control Plane — Share/Connect/Orchestrate/Secure layers; govern which MCPs are approved, how agents are registered, and how costs are tracked.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-high">High</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
+          </td>
+          <td>
+            Samir presented full architecture at Kedar Offsite. COE is the "AI CoE" entity in the control-plane diagram. Prevents "agent bubble" technical debt and the $2.8M–$5M/yr coordination waste at 50-engineer scale.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+            <span class="source-tag">GTM Summit</span>
+          </td>
+        </tr>
+
+        <!-- 10 -->
+        <tr data-type="Delivery" data-imp="high">
+          <td>
+            <div class="item-name">Global Services Risk Management (GSRM) Scoping Agent</div>
+            <div class="item-desc">Scale the agentic risk-scoring tool (130+ risk breakdown categories, 5 years of data) to cover the 92% of smaller deals currently not reviewed; integrate risk data into Day One canvas.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-high">High</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
+          </td>
+          <td>
+            Liz Moravec demoed at Kedar Offsite. 73% higher project failure rate when 5+ risks are identified early. COE owns scaling, field adoption, and a polished demo video for La Lima.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+            <span class="source-tag">Advisor Kickoff</span>
+          </td>
+        </tr>
+
+        <!-- 11 -->
+        <tr data-type="Delivery" data-imp="high">
+          <td>
+            <div class="item-name">Product Implementation Expert Agent (Practice Knowledge)</div>
+            <div class="item-desc">Build and maintain the self-service agentic interface that surfaces certified PS knowledge for delivery consultants across Slack, Claude Code, and Cursor.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-high">High</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
+          </td>
+          <td>
+            Detailed roadmap shown at Kedar Offsite (May alpha → June beta → July/Aug GA). Eliminates SME bottlenecks and fragmented tribal knowledge. COE owns the "Super SME" foundation and VOS feedback loop.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 12 -->
+        <tr data-type="Delivery" data-imp="high">
+          <td>
+            <div class="item-name">Trust 360 / Org Health Integration into Delivery</div>
+            <div class="item-desc">Mandate Trust 360 as part of the Day One delivery methodology for all projects; develop persona-based proactive signals for professional services engagement opportunities.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-high">High</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
+          </td>
+          <td>
+            Karishma Lalwani demoed at Kedar Offsite. COE tasked with piloting across 2 OUs, linking output into PS engagement motions, and defining proactive go-to-market signals from telemetry.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 13 -->
+        <tr data-type="Pre-Sales" data-imp="high">
+          <td>
+            <div class="item-name">Outcome-Based Contracting &amp; SOW Evolution</div>
+            <div class="item-desc">Define how Statements of Work and governance structures must adapt for AI-native delivery; support outcome-based contracts with frequent go-live milestones instead of fixed multi-year SOWs.</div>
+          </td>
+          <td><span class="badge badge-presales">Pre-Sales</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-high">High</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
+          </td>
+          <td>
+            Formal decision at Kedar Offsite. Christina and field feedback both pointed to customer pressure for predictability. COE must prescribe the commercial framework that aligns with QL methodology.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+            <span class="source-tag">GTM Summit</span>
+          </td>
+        </tr>
+
+        <!-- 14 -->
+        <tr data-type="Delivery" data-imp="medium">
+          <td>
+            <div class="item-name">Agentic Experience Design (Unified UI / "Agentic Window")</div>
+            <div class="item-desc">Define a consistent design wrapper and style guide so all PS agents provide a cohesive practitioner experience across Slack, Claude Code, in-app, and headless surfaces.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-medium">Medium</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
+          </td>
+          <td>
+            Flagged as "Needs Further Discussion" at Kedar Offsite. Kedar, Joan, and Joseph tasked to meet and resolve. Needed to prevent fragmented customer experience as agent count scales to 100K skills.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 15 -->
+        <tr data-type="Pre-Sales" data-imp="medium">
+          <td>
+            <div class="item-name">Global Field Insights &amp; OU Feedback Loop (GIST)</div>
+            <div class="item-desc">Operate the mechanism that collects regional insights, standardizes them globally, and federates improvements back — analogous to Tesla OTA software updates for the field.</div>
+          </td>
+          <td><span class="badge badge-presales">Pre-Sales</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-medium">Medium</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
+          </td>
+          <td>
+            Core COE mandate defined by Resh at Advisor Kickoff. Team must stay connected to OU leaders and Chiefs of Staff to surface regional needs. Underpins all standardization work.
+            <br>
+            <span class="source-tag">Advisor Kickoff</span>
+          </td>
+        </tr>
+
+        <!-- 16 -->
+        <tr data-type="Pre-Sales" data-imp="medium">
+          <td>
+            <div class="item-name">Proposal Shaping &amp; RFP Intelligence (AI-Assisted)</div>
+            <div class="item-desc">Provide tools and support (Scopezilla → scope context package, Claude Code for RFP ingestion) to compress 32-week proposals to 20 weeks with AI-generated architecture, roadmaps, and epics.</div>
+          </td>
+          <td><span class="badge badge-presales">Pre-Sales</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-medium">Medium</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
+          </td>
+          <td>
+            Q2 Accelerate sessions included "Winning Proposals" track. GTM Summit highlighted Claude Code for RFP Intelligence. COE is the enabler for the field Scoper persona (Guided Scoping / Scopezilla).
+            <br>
+            <span class="source-tag">GTM Summit</span>
+            <span class="source-tag">Advisor Kickoff</span>
+          </td>
+        </tr>
+
+        <!-- 17 -->
+        <tr data-type="Delivery" data-imp="medium">
+          <td>
+            <div class="item-name">Change Management Integration into QL Engagements</div>
+            <div class="item-desc">Define the lightweight change management team model to deploy at customer kickoff; ensure rapid agentic build cycles do not outpace customer organizational readiness.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-medium">Medium</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
+          </td>
+          <td>
+            Formal decision at Kedar Offsite (include change management recommendation in pilot end-of-program proposals). Stephanie flagged that agentic build speed routinely outpaces customer process evolution.
+            <br>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+        <!-- 18 -->
+        <tr data-type="Delivery" data-imp="medium">
+          <td>
+            <div class="item-name">Agentic Enablement &amp; AI Mindset Training (Internal)</div>
+            <div class="item-desc">Shift enablement from tool-based to AI-mindset training; drive adoption of Yoodli roleplay, AI-Powered Selling ACT course, and Seller 360 leveling guides across the global PS workforce.</div>
+          </td>
+          <td><span class="badge badge-delivery">Delivery</span></td>
+          <td class="importance-cell">
+            <div class="imp-label imp-medium">Medium</div>
+            <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
+          </td>
+          <td>
+            GTM Summit flagged only 71% ACT course completion. Kedar Offsite called out need for CTA simulations and project-level AI mindset training. COE must prescribe and track adoption, not just create content.
+            <br>
+            <span class="source-tag">GTM Summit</span>
+            <span class="source-tag">Kedar Offsite</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>
+  Global CoE Advisor Team &nbsp;·&nbsp; Synthesized from meeting notes June 2026 &nbsp;·&nbsp; Generated 2026-06-04
+</footer>
+
+<script>
+  function filterTable(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const rows = document.querySelectorAll('#main-table tbody tr');
+    rows.forEach(row => {
+      if (type === 'all') {
+        row.classList.remove('hidden');
+      } else if (type === 'critical') {
+        row.dataset.imp === 'critical' ? row.classList.remove('hidden') : row.classList.add('hidden');
+      } else {
+        const rowType = row.dataset.type;
+        if (rowType === type || rowType === 'Both') {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
