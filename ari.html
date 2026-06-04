@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ARI Process — Analysis & Recommendations</title>
+  <style>
+    :root {
+      --sf-blue: #0176d3;
+      --sf-blue-dark: #014486;
+      --sf-blue-light: #e8f4fd;
+      --sf-teal: #06a59a;
+      --sf-teal-light: #e0f5f4;
+      --sf-red: #ba0517;
+      --sf-red-light: #fde8ea;
+      --sf-orange: #dd7a01;
+      --sf-orange-light: #fff3e0;
+      --sf-green: #2e844a;
+      --sf-green-light: #eaf5ea;
+      --sf-yellow: #b47e11;
+      --sf-yellow-light: #fef9e6;
+      --sf-gray-1: #f3f3f3;
+      --sf-gray-2: #dddbda;
+      --sf-gray-3: #706e6b;
+      --sf-text: #181818;
+      --sf-white: #ffffff;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--sf-text);
+      background: var(--sf-gray-1);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--sf-blue-dark) 0%, var(--sf-blue) 100%);
+      color: var(--sf-white);
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+    header .badge {
+      display: inline-block;
+      background: var(--sf-teal);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    header p.subtitle { font-size: 1.05rem; opacity: 0.85; }
+    header .meta { margin-top: 12px; font-size: 0.85rem; opacity: 0.7; }
+
+    nav {
+      background: var(--sf-blue-dark);
+      padding: 0 32px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+    nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 12px 16px;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    nav a:hover { color: #fff; border-bottom-color: var(--sf-teal); }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 32px 16px 64px; }
+
+    .section {
+      background: var(--sf-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--sf-blue-dark);
+      border-bottom: 2px solid var(--sf-blue-light);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sf-blue);
+      margin: 22px 0 8px;
+    }
+    .section h3:first-of-type { margin-top: 0; }
+    .section p { margin-bottom: 10px; font-size: 0.95rem; }
+    ul { padding-left: 20px; margin-bottom: 10px; }
+    ul li { font-size: 0.95rem; margin-bottom: 6px; }
+
+    /* Process flow */
+    .process-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 8px;
+    }
+    .process-step {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+    .step-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 48px;
+      flex-shrink: 0;
+    }
+    .step-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sf-blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .step-line {
+      width: 2px;
+      flex: 1;
+      background: var(--sf-gray-2);
+      min-height: 24px;
+    }
+    .process-step:last-child .step-line { display: none; }
+    .step-body {
+      padding: 4px 0 24px 16px;
+      flex: 1;
+    }
+    .step-body h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sf-blue-dark);
+      margin-bottom: 6px;
+    }
+    .step-body p { font-size: 0.9rem; color: var(--sf-gray-3); margin-bottom: 4px; }
+    .step-body ul li { font-size: 0.9rem; color: var(--sf-gray-3); }
+
+    /* Approval chain */
+    .approval-chain {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .approval-level {
+      background: var(--sf-blue-light);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border-top: 3px solid var(--sf-blue);
+      position: relative;
+    }
+    .approval-level .level-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--sf-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+    .approval-level h4 { font-size: 0.92rem; font-weight: 700; color: var(--sf-blue-dark); margin-bottom: 4px; }
+    .approval-level p { font-size: 0.85rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* Eligibility grid */
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .criteria-box {
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .criteria-box.required {
+      background: var(--sf-green-light);
+      border-left: 4px solid var(--sf-green);
+    }
+    .criteria-box.preferred {
+      background: var(--sf-yellow-light);
+      border-left: 4px solid var(--sf-yellow);
+    }
+    .criteria-box h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+    .criteria-box.required h4 { color: var(--sf-green); }
+    .criteria-box.preferred h4 { color: var(--sf-yellow); }
+    .criteria-box ul li { font-size: 0.88rem; margin-bottom: 4px; }
+
+    /* Gaps */
+    .gap-list { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .gap-item {
+      display: flex;
+      gap: 14px;
+      background: var(--sf-gray-1);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border-left: 4px solid var(--sf-red);
+    }
+    .gap-item.medium { border-left-color: var(--sf-orange); }
+    .gap-item.low { border-left-color: var(--sf-yellow); }
+    .gap-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--sf-white);
+      background: var(--sf-red);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .gap-item.medium .gap-num { background: var(--sf-orange); }
+    .gap-item.low .gap-num { background: var(--sf-yellow); }
+    .gap-content h4 { font-size: 0.95rem; font-weight: 700; color: var(--sf-text); margin-bottom: 4px; }
+    .gap-content p { font-size: 0.88rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* Recommendations */
+    .rec-list { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+    .rec-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .rec-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .rec-content h4 { font-size: 0.97rem; font-weight: 700; color: var(--sf-blue-dark); margin-bottom: 4px; }
+    .rec-content p { font-size: 0.88rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* Callout boxes */
+    .callout {
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.92rem;
+    }
+    .callout.red { background: var(--sf-red-light); border-left: 4px solid var(--sf-red); }
+    .callout.blue { background: var(--sf-blue-light); border-left: 4px solid var(--sf-blue); }
+    .callout.teal { background: var(--sf-teal-light); border-left: 4px solid var(--sf-teal); }
+    .callout.orange { background: var(--sf-orange-light); border-left: 4px solid var(--sf-orange); }
+    .callout strong { display: block; margin-bottom: 4px; }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-right: 4px;
+    }
+    .tag.high { background: var(--sf-red-light); color: var(--sf-red); }
+    .tag.medium { background: var(--sf-orange-light); color: var(--sf-orange); }
+    .tag.low { background: var(--sf-yellow-light); color: var(--sf-yellow); }
+    .tag.coe { background: var(--sf-teal-light); color: #04837b; }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--sf-gray-3);
+      padding: 24px;
+    }
+
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.4rem; }
+      .section { padding: 20px 16px; }
+      .criteria-grid { grid-template-columns: 1fr; }
+      .approval-chain { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Professional Services COE</div>
+  <h1>Attrition Reduction Investment (ARI)</h1>
+  <p class="subtitle">Process Map · Gap Analysis · Recommendations</p>
+  <p class="meta">Compiled from Slack · June 2026 · Global ProServ COE</p>
+</header>
+
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#eligibility">Eligibility</a>
+  <a href="#process">Process</a>
+  <a href="#approvals">Approvals</a>
+  <a href="#gaps">Gaps</a>
+  <a href="#recommendations">Recommendations</a>
+</nav>
+
+<div class="container">
+
+  <!-- Overview -->
+  <div class="section" id="overview">
+    <h2>📌 What is ARI?</h2>
+    <p>The <strong>Attrition Reduction Investment (ARI)</strong> program funds Salesforce Professional Services delivery at <em>no cost to the customer</em>, in exchange for a renewal commitment. It is a strategic lever used on Red Accounts where PS work is the critical enabler of preventing contract attrition.</p>
+    <div class="callout blue">
+      <strong>The pitch to customers:</strong>
+      "Salesforce will send in-house experts to implement at zero cost — all we need is your renewal commitment."
+    </div>
+    <p>ARI is distinct from a standard Services Work Exception (SWE). It is specifically scoped to accounts where customer attrition is at risk and where ProServ engagement — adoption, implementation, enablement — directly addresses the root cause of that risk.</p>
+    <div class="callout orange">
+      <strong>⚠️ Recent Change — ROI Threshold Raised</strong>
+      Leadership raised the minimum ROI requirement from <strong>1x to 2x</strong> in FY27 to prioritize high-impact requests and ensure the best possible return on investments. All current and future submissions must meet this bar.
+    </div>
+  </div>
+
+  <!-- Eligibility -->
+  <div class="section" id="eligibility">
+    <h2>✅ Eligibility Criteria</h2>
+    <div class="criteria-grid">
+      <div class="criteria-box required">
+        <h4>Required (Must Meet All)</h4>
+        <ul>
+          <li>$500K+ forecasted attrition on a renewal opportunity</li>
+          <li>Renewal in FY27 or FY28</li>
+          <li><strong>2x ROI or higher</strong> on attrition mitigation (e.g., $1M investment to save $2M+)</li>
+          <li>Account is a designated Red Account</li>
+          <li>Attrition risk is mitigable by Salesforce Professional Services</li>
+          <li>Aligned with Sales Account Team &amp; Sales OU Leadership</li>
+        </ul>
+      </div>
+      <div class="criteria-box preferred">
+        <h4>Preferred (Increases Approval Likelihood)</h4>
+        <ul>
+          <li>Multi-year renewal (3+ years preferred)</li>
+          <li>Customer intent to renew the at-risk footprint</li>
+          <li>Full save not required — partial saves qualify if AOV saved exceeds $500K and hits 2x ROI</li>
+          <li>Customer has confirmed executive sponsorship for the work</li>
+          <li>Early renewal to pull forward ACV</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout teal" style="margin-top:16px;">
+      <strong>Note on 1-Year Renewals:</strong>
+      ARI can be approved even if the customer renews for just 1 year — confirmed by leadership. Multi-year is preferred but not a hard block.
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div class="section" id="process">
+    <h2>🗺️ Process Map</h2>
+    <div class="process-flow">
+
+      <div class="process-step">
+        <div class="step-connector">
+          <div class="step-circle">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h4>Verify Eligibility &amp; Align Team</h4>
+          <p>Confirm the account meets all required criteria: Red Account status, FY renewal timing, $500K+ attrition risk, and that ProServ can address the root cause.</p>
+          <ul>
+            <li>Align with Account SE and CSG Account Partner to verbally scope business use-case</li>
+            <li>Agree on the appropriate investment amount (ROM) needed for the SOW and PS implementation</li>
+            <li>AP opens an Opportunity in Org62 for the ARI — even at Stage 1 (required)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-connector">
+          <div class="step-circle">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h4>Complete ARI Request Form &amp; Exec Summary</h4>
+          <p>Fill out the Basecamp ARI Request Form with account details, attrition risk amount, root cause (Adoption/Performance/Implementation), and specific challenges.</p>
+          <ul>
+            <li>A Slack thread is created in <strong>#sales-sci-requests</strong> within ~1 business day of submission</li>
+            <li>Create the Exec Summary slide using the approved template (Slide 17 of the enablement deck)</li>
+            <li>Link the Exec Summary in the Basecamp ticket and the #sales-sci-requests Slack thread</li>
+            <li>Update the Red Account ECOMM Headline to include <strong>#ARI</strong></li>
+            <li>Ensure the Forecasted Attrition field on the Red Account record reflects the full amount at risk</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-connector">
+          <div class="step-circle">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h4>Submit for Approval Review</h4>
+          <p>Submission flows automatically via Basecamp into the ARI Committee's Slack approval workflow. The committee meets weekly to review submissions.</p>
+          <ul>
+            <li>The four-level approval chain progresses sequentially (see Approval Chain section)</li>
+            <li>Scoping conversations with customers may begin after L3 (PS Geo Lead) approval</li>
+            <li>Do <strong>not</strong> commit an investment amount to the customer until full L4 approval</li>
+            <li>Expedited/async review is available for time-sensitive cases with leadership support</li>
+            <li>Full approval timeline: <strong>4–6 weeks minimum</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-connector">
+          <div class="step-circle">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h4>Secure Customer Commitment &amp; Renewal</h4>
+          <p>Once approval is in progress or received, secure a customer commitment to renew contingent on the ARI investment. This can be a verbal, email, or SOW-level commitment.</p>
+          <ul>
+            <li>ARI funding is released upon contract signature (early renewal is acceptable and preferred)</li>
+            <li>Ask the critical question directly: <em>"If we do this work, will it prevent the attrition?"</em></li>
+            <li>Ideal scenario: ARI drives an early renewal, pulling forward ARR</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-connector">
+          <div class="step-circle">5</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <h4>ProServ Engagement Begins</h4>
+          <p>Once the ARI is approved and the renewal/commitment is in place, Professional Services resources are assigned and delivery begins.</p>
+          <ul>
+            <li>PS team delivers hands-on implementation, user training, adoption enablement, and knowledge transfer</li>
+            <li>ARI Program Manager (by Geo) oversees delivery health via weekly health check framework</li>
+            <li>Delivered SWE Amount is tracked against the approved investment to forecast budget consumption</li>
+            <li>Scope must remain tied to the original approved use case — scope drift is actively monitored</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Approval Chain -->
+  <div class="section" id="approvals">
+    <h2>🏛️ Approval Chain</h2>
+    <p style="margin-bottom:16px; font-size:0.92rem; color:var(--sf-gray-3);">All four levels must be completed sequentially. Each level cannot proceed until the prior one is fully approved.</p>
+    <div class="approval-chain">
+      <div class="approval-level">
+        <div class="level-badge">Level 1</div>
+        <h4>Business Alignment</h4>
+        <p>Criteria validation — Exec summary reviewed for eligibility, ROI, and completeness.</p>
+      </div>
+      <div class="approval-level">
+        <div class="level-badge">Level 2</div>
+        <h4>OU Leader Approval</h4>
+        <p>Feasibility check: PS budget &amp; capacity. Includes OU GM, PS Geo Lead, and any OU-specific approvers.</p>
+      </div>
+      <div class="approval-level">
+        <div class="level-badge">Level 3</div>
+        <h4>Geo Approval</h4>
+        <p>Geographic leadership approval (e.g., Christina Meitus for AMER). Scoping conversations may begin at this stage.</p>
+      </div>
+      <div class="approval-level">
+        <div class="level-badge">Level 4</div>
+        <h4>Global / Final Approval</h4>
+        <p>Executive-level final approvals — includes Lori Steele, Jim Roth, and Miguel. Investment cannot be communicated to customer until this level is complete.</p>
+      </div>
+    </div>
+    <div class="callout orange" style="margin-top:16px;">
+      <strong>⚠️ Timing Conflict Risk:</strong>
+      The 4–6 week minimum approval window frequently conflicts with urgent renewal or SIC dates. Teams should initiate ARI submissions as early as possible — ideally 8–10 weeks before the renewal date.
+    </div>
+  </div>
+
+  <!-- Gaps -->
+  <div class="section" id="gaps">
+    <h2>🔍 Identified Gaps</h2>
+    <p style="margin-bottom:16px; font-size:0.92rem; color:var(--sf-gray-3);">The following gaps were identified through Slack conversations across Red Account channels, the #ari-support-channel, DMs, and the ARI governance workstream. Severity ratings reflect frequency and business impact.</p>
+
+    <div class="gap-list">
+
+      <div class="gap-item">
+        <div class="gap-num">1</div>
+        <div class="gap-content">
+          <h4>No Direct Customer Validation of Proposed Work <span class="tag high">HIGH</span></h4>
+          <p>The single biggest gap identified: teams are scoping and submitting ARIs without directly asking the customer "If we do this work, will it prevent the attrition?" This results in customers receiving work that doesn't address their real issues, leading to non-renewals post-delivery. Leadership (Lori Steele) has noted this as a critical problem with scoping quality.</p>
+        </div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-num">2</div>
+        <div class="gap-content">
+          <h4>Loose &amp; High-Level Scoping <span class="tag high">HIGH</span></h4>
+          <p>The submission process remains high-level, and solutions often reflect "what Salesforce thinks solves the problem" rather than what the customer actually needs. The Exec Summary template provides structure but doesn't enforce customer-validated scope. Scope quality is inconsistent across geos and account teams.</p>
+        </div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-num">3</div>
+        <div class="gap-content">
+          <h4>Customer Commitment Chicken-and-Egg <span class="tag high">HIGH</span></h4>
+          <p>The process requires documented customer intent to renew before submission, but teams cannot guarantee the ARI investment to the customer until L4 approval is received. This creates a deadlock — account teams face pushback from customers who won't commit without knowing the investment is confirmed. No clear resolution guidance exists in official documentation.</p>
+        </div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-num">4</div>
+        <div class="gap-content">
+          <h4>Notable Gap Between ARI Approval and SOW Signing <span class="tag high">HIGH</span></h4>
+          <p>Even after L4 approval, there is a significant and unaddressed gap before an SOW is executed. No structured handoff or SLA exists between approval and SOW signature, creating delays that compress the time available for actual delivery before the renewal date.</p>
+        </div>
+      </div>
+
+      <div class="gap-item medium">
+        <div class="gap-num">5</div>
+        <div class="gap-content">
+          <h4>Scope Drift After Approval <span class="tag medium">MEDIUM</span></h4>
+          <p>Multiple instances observed (particularly in CBS) where the original need that drove ARI approval is no longer valid, but teams attempt to repurpose the approved funds for different work. APs now being compensated on ARI closures creates incentive to close ARIs at all cost, increasing scope drift risk.</p>
+        </div>
+      </div>
+
+      <div class="gap-item medium">
+        <div class="gap-num">6</div>
+        <div class="gap-content">
+          <h4>License &amp; Success Team Education Gap <span class="tag medium">MEDIUM</span></h4>
+          <p>License and Customer Success teams consistently lack a clear understanding of the ARI program — what it is, who qualifies, and how it works. Teams regularly require re-education on program basics, slowing down coordination and creating submission errors. ARI submissions can only be done by Success resources (CSM or CSAL), yet many Success reps don't fully understand the process.</p>
+        </div>
+      </div>
+
+      <div class="gap-item medium">
+        <div class="gap-num">7</div>
+        <div class="gap-content">
+          <h4>No Standardized Guidance on Customer Commitment Format <span class="tag medium">MEDIUM</span></h4>
+          <p>Multiple teams across geos (JPKT, EMEA, AMER) have asked for specific guidance on how to capture customer commitment — format, legal guardrails against "side letter" issues, and specific language to use. Current documentation says "email, SOW, or verbal commitment" but provides no standard template or legal review guidance.</p>
+        </div>
+      </div>
+
+      <div class="gap-item medium">
+        <div class="gap-num">8</div>
+        <div class="gap-content">
+          <h4>ARI Offered to Customer Before Approvals Complete <span class="tag medium">MEDIUM</span></h4>
+          <p>Multiple instances documented where ARI investments were communicated to customers before final L4 approval, creating commitment risk and approval complications. Current guardrails are not consistently enforced across the field.</p>
+        </div>
+      </div>
+
+      <div class="gap-item medium">
+        <div class="gap-num">9</div>
+        <div class="gap-content">
+          <h4>Field Permissions &amp; Submission Barriers <span class="tag medium">MEDIUM</span></h4>
+          <p>Field access issues prevent smooth submission: the Forecasted Attrition field on Red Account records is not editable by all submission participants. In some cases, Sales COO approval is required before submission but teams discover this mid-process. Visibility into the approval chain within the SCI workflow is inconsistent.</p>
+        </div>
+      </div>
+
+      <div class="gap-item low">
+        <div class="gap-num">10</div>
+        <div class="gap-content">
+          <h4>No ARI-Specific SOW Guidance <span class="tag low">LOW</span></h4>
+          <p>Teams preparing SOWs for ARI-funded work are unclear on which clauses, guardrails, or contract structures are required. The standard SWE $0 SOW template is being used without ARI-specific modifications, creating legal and scope accountability gaps.</p>
+        </div>
+      </div>
+
+      <div class="gap-item low">
+        <div class="gap-num">11</div>
+        <div class="gap-content">
+          <h4>Two-Step ARI Process Undefined <span class="tag low">LOW</span></h4>
+          <p>When both discovery/scoping and implementation are needed (and the discovery itself is more than a standard scoping exercise), the process for submitting two sequential ARIs is unclear. Teams receive inconsistent guidance on whether to submit a single combined request or two separate ones.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="section" id="recommendations">
+    <h2>💡 Recommendations</h2>
+    <p style="margin-bottom:20px; font-size:0.92rem; color:var(--sf-gray-3);">The following recommendations are prioritized by impact and feasibility. COE-owned items are marked accordingly.</p>
+
+    <div class="rec-list">
+
+      <div class="rec-item">
+        <div class="rec-icon">🎯</div>
+        <div class="rec-content">
+          <h4>Mandate a Customer Validation Conversation Before Scoping <span class="tag high">HIGH PRIORITY</span> <span class="tag coe">COE</span></h4>
+          <p>Require account teams to document a direct customer response to: <em>"If Salesforce invests in this work, will it prevent the attrition and secure the renewal?"</em> This response (verbal, email, or meeting notes) should be a required field in the ARI submission form — not optional. This is the most impactful single change available.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">📋</div>
+        <div class="rec-content">
+          <h4>Introduce a Structured Pre-Submission Scoping Checklist <span class="tag high">HIGH PRIORITY</span> <span class="tag coe">COE</span></h4>
+          <p>The COE should develop and require a scoping checklist before ARI submission — covering: root cause confirmed with customer, proposed scope reviewed with Account SE, customer has endorsed the work plan, and an attrition-prevention linkage has been explicitly documented. This bridges the gap between the high-level process and submission quality.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">🔄</div>
+        <div class="rec-content">
+          <h4>Publish a Resolution to the Customer Commitment Deadlock <span class="tag high">HIGH PRIORITY</span></h4>
+          <p>Officially document the sequencing guidance: teams may initiate exploratory conversations about scope and intent after L3 approval, but should not commit dollar amounts until L4. Provide a standard "intent language" script that account teams can use with customers to secure conditional commitment without over-promising. This resolves the most commonly raised question in #ari-support-channel.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">⏱️</div>
+        <div class="rec-content">
+          <h4>Define an Approval-to-SOW SLA <span class="tag high">HIGH PRIORITY</span></h4>
+          <p>Establish a target window (e.g., 10 business days) between L4 approval and SOW execution. Assign ownership of the SOW drafting process post-approval to the ARI Program Manager. This closes the currently unaddressed gap between approval and delivery kickoff.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">📢</div>
+        <div class="rec-content">
+          <h4>Launch ARI Education for License and Success Teams <span class="tag medium">MEDIUM PRIORITY</span> <span class="tag coe">COE</span></h4>
+          <p>Develop a short (10-min), evergreen ARI explainer module for CSMs, CSALs, and License teams — covering what ARI is, who qualifies, the submission process, and common mistakes. Embed it in onboarding for Success roles and distribute via the GCO weekly newsletter. The current reliance on word-of-mouth education is not scalable.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">🛡️</div>
+        <div class="rec-content">
+          <h4>Implement Scope Drift Controls <span class="tag medium">MEDIUM PRIORITY</span></h4>
+          <p>Require that any material change to approved ARI scope be re-submitted as a scope amendment for OU Leader review. Create a field in the ARI tracking system to flag instances where the business need at time of submission differs from the proposed SOW. The AP compensation change makes this especially urgent.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">📄</div>
+        <div class="rec-content">
+          <h4>Publish ARI-Specific SOW Template and Legal Guidance <span class="tag medium">MEDIUM PRIORITY</span> <span class="tag coe">COE</span></h4>
+          <p>Develop a standard ARI SOW template with required clauses (scope boundaries, renewal contingency language, deliverable ownership, no side-letter protections). Distribute via the COE and link directly from the ARI Submission Guide. Teams should not be adapting the generic SWE template for ARI use.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">📝</div>
+        <div class="rec-content">
+          <h4>Create a Standard Customer Commitment Template <span class="tag medium">MEDIUM PRIORITY</span></h4>
+          <p>Develop a short, legally-reviewed document (or email template) that formalizes customer intent to renew contingent on ARI investment. This removes ambiguity for account teams globally, reduces legal risk around side-letter issues, and creates a consistent paper trail for audit purposes.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">🔧</div>
+        <div class="rec-content">
+          <h4>Fix Field Permissions and Submission Prerequisites <span class="tag low">LOW PRIORITY</span></h4>
+          <p>Audit and resolve: (1) Forecasted Attrition field editability on Red Account records for all submission participants, (2) Sales COO approval prerequisite — surface this requirement earlier in the submission flow, and (3) approval chain visibility in the SCI workflow so submitters can track status without relying on ad hoc Slack updates.</p>
+        </div>
+      </div>
+
+      <div class="rec-item">
+        <div class="rec-icon">📐</div>
+        <div class="rec-content">
+          <h4>Define the Two-Step ARI Process <span class="tag low">LOW PRIORITY</span> <span class="tag coe">COE</span></h4>
+          <p>Publish official guidance on when a discovery-only ARI is appropriate vs. a combined discovery + implementation request. Provide a decision tree and example submissions for each path. This is a recurring question in #ari-support-channel and the current "it depends" answer creates inconsistency across geos.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Summary Table -->
+  <div class="section">
+    <h2>📊 Gap-to-Recommendation Map</h2>
+    <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+      <thead>
+        <tr style="background:var(--sf-blue); color:#fff;">
+          <th style="text-align:left; padding:8px 12px;">Gap</th>
+          <th style="text-align:left; padding:8px 12px;">Severity</th>
+          <th style="text-align:left; padding:8px 12px;">Recommendation</th>
+          <th style="text-align:left; padding:8px 12px;">Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">No customer validation of proposed work</td>
+          <td style="padding:8px 12px;"><span class="tag high">HIGH</span></td>
+          <td style="padding:8px 12px;">Mandatory customer validation conversation before scoping</td>
+          <td style="padding:8px 12px;"><span class="tag coe">COE</span></td>
+        </tr>
+        <tr style="background:var(--sf-blue-light); border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">Loose, high-level scoping</td>
+          <td style="padding:8px 12px;"><span class="tag high">HIGH</span></td>
+          <td style="padding:8px 12px;">Structured pre-submission scoping checklist</td>
+          <td style="padding:8px 12px;"><span class="tag coe">COE</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">Customer commitment deadlock</td>
+          <td style="padding:8px 12px;"><span class="tag high">HIGH</span></td>
+          <td style="padding:8px 12px;">Publish sequencing guidance + intent language script</td>
+          <td style="padding:8px 12px;">ARI Ops</td>
+        </tr>
+        <tr style="background:var(--sf-blue-light); border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">Gap between approval and SOW signing</td>
+          <td style="padding:8px 12px;"><span class="tag high">HIGH</span></td>
+          <td style="padding:8px 12px;">Define Approval-to-SOW SLA + ARI PM ownership</td>
+          <td style="padding:8px 12px;">ARI PM</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">Scope drift after approval</td>
+          <td style="padding:8px 12px;"><span class="tag medium">MEDIUM</span></td>
+          <td style="padding:8px 12px;">Scope drift controls + scope amendment process</td>
+          <td style="padding:8px 12px;">ARI Ops</td>
+        </tr>
+        <tr style="background:var(--sf-blue-light); border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">License &amp; Success education gap</td>
+          <td style="padding:8px 12px;"><span class="tag medium">MEDIUM</span></td>
+          <td style="padding:8px 12px;">Evergreen ARI explainer module for CSM/CSAL</td>
+          <td style="padding:8px 12px;"><span class="tag coe">COE</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">ARI offered before approval</td>
+          <td style="padding:8px 12px;"><span class="tag medium">MEDIUM</span></td>
+          <td style="padding:8px 12px;">Enforce guardrails + publish intent language template</td>
+          <td style="padding:8px 12px;">ARI Ops</td>
+        </tr>
+        <tr style="background:var(--sf-blue-light); border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">No customer commitment format/template</td>
+          <td style="padding:8px 12px;"><span class="tag medium">MEDIUM</span></td>
+          <td style="padding:8px 12px;">Standard customer commitment template (legal-reviewed)</td>
+          <td style="padding:8px 12px;">Legal + COE</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">No ARI-specific SOW guidance</td>
+          <td style="padding:8px 12px;"><span class="tag low">LOW</span></td>
+          <td style="padding:8px 12px;">ARI SOW template + required clauses guide</td>
+          <td style="padding:8px 12px;"><span class="tag coe">COE</span></td>
+        </tr>
+        <tr style="background:var(--sf-blue-light); border-bottom:1px solid var(--sf-gray-2);">
+          <td style="padding:8px 12px;">Field permissions &amp; submission barriers</td>
+          <td style="padding:8px 12px;"><span class="tag low">LOW</span></td>
+          <td style="padding:8px 12px;">Audit &amp; fix field permissions + surface prerequisites earlier</td>
+          <td style="padding:8px 12px;">Ops/Tech</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 12px;">Two-step ARI process undefined</td>
+          <td style="padding:8px 12px;"><span class="tag low">LOW</span></td>
+          <td style="padding:8px 12px;">Decision tree + example submissions for two-step path</td>
+          <td style="padding:8px 12px;"><span class="tag coe">COE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  Global Professional Services COE &nbsp;·&nbsp; ARI Process Analysis &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Based on Slack data from #ari-support-channel, #sales-sci-requests, Red Account channels, and internal DMs
+</footer>
+
+</body>
+</html>
