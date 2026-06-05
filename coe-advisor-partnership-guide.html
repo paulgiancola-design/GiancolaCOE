@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COE Advisor: OU Partnership Guide</title>
+  <style>
+    :root {
+      --sf-blue: #0176d3;
+      --sf-blue-dark: #014486;
+      --sf-blue-light: #e8f4fd;
+      --sf-teal: #06a59a;
+      --sf-teal-light: #e0f5f4;
+      --sf-purple: #5867e8;
+      --sf-purple-light: #f0f1fd;
+      --sf-orange: #dd7a01;
+      --sf-orange-light: #fff3e0;
+      --sf-green: #2e844a;
+      --sf-green-light: #eaf5ea;
+      --sf-red: #ba0517;
+      --sf-red-light: #fdf0f0;
+      --sf-gray-1: #f3f3f3;
+      --sf-gray-2: #dddbda;
+      --sf-gray-3: #706e6b;
+      --sf-text: #181818;
+      --sf-white: #ffffff;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--sf-text);
+      background: var(--sf-gray-1);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--sf-blue-dark) 0%, var(--sf-blue) 100%);
+      color: var(--sf-white);
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-block;
+      background: var(--sf-teal);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    header p.subtitle { font-size: 1.05rem; opacity: 0.85; }
+    header .meta { margin-top: 16px; font-size: 0.9rem; opacity: 0.75; }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .section {
+      background: var(--sf-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--sf-blue-dark);
+      border-bottom: 2px solid var(--sf-blue-light);
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .section p { font-size: 0.95rem; margin-bottom: 10px; }
+    .section p:last-child { margin-bottom: 0; }
+
+    /* What We Do Together */
+    .do-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .do-item {
+      display: flex;
+      gap: 12px;
+      background: var(--sf-gray-1);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      align-items: flex-start;
+    }
+
+    .do-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .do-item .do-content strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--sf-text); margin-bottom: 3px; }
+    .do-item .do-content span { font-size: 0.84rem; color: var(--sf-gray-3); }
+
+    /* What This Is Not */
+    .not-box {
+      background: var(--sf-red-light);
+      border-left: 4px solid var(--sf-red);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px;
+      font-size: 0.93rem;
+    }
+
+    /* Cadence tiers */
+    .cadence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .cadence-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--sf-gray-2);
+    }
+
+    .cadence-item .cadence-header {
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .cadence-item.tier-1 .cadence-header { background: var(--sf-blue-dark); }
+    .cadence-item.tier-2 .cadence-header { background: var(--sf-teal); }
+    .cadence-item.tier-3 .cadence-header { background: var(--sf-purple); }
+
+    .cadence-item .cadence-body {
+      padding: 14px;
+      background: var(--sf-white);
+    }
+
+    .cadence-item .cadence-body .freq {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--sf-blue-dark);
+      margin-bottom: 4px;
+    }
+
+    .cadence-item.tier-2 .cadence-body .freq { color: #04837b; }
+    .cadence-item.tier-3 .cadence-body .freq { color: var(--sf-purple); }
+
+    .cadence-item .cadence-body .audience {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--sf-text);
+      margin-bottom: 6px;
+    }
+
+    .cadence-item .cadence-body p {
+      font-size: 0.83rem;
+      color: var(--sf-gray-3);
+      margin: 0;
+    }
+
+    .cadence-note {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: var(--sf-gray-3);
+      font-style: italic;
+    }
+
+    /* Success */
+    .success-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .success-item {
+      background: var(--sf-blue-light);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .success-item.teal { background: var(--sf-teal-light); }
+    .success-item.purple { background: var(--sf-purple-light); }
+    .success-item.green { background: var(--sf-green-light); }
+
+    .success-item .success-num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--sf-blue-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .success-item.teal .success-num { color: #04837b; }
+    .success-item.purple .success-num { color: var(--sf-purple); }
+    .success-item.green .success-num { color: var(--sf-green); }
+
+    .success-item strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--sf-text); margin-bottom: 4px; }
+    .success-item p { font-size: 0.82rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* How to get the most */
+    .ask-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .ask-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--sf-gray-1);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+
+    .ask-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--sf-blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .ask-item .ask-content strong { display: block; font-size: 0.92rem; font-weight: 700; color: var(--sf-text); margin-bottom: 3px; }
+    .ask-item .ask-content p { font-size: 0.88rem; color: var(--sf-gray-3); margin: 0; }
+
+    .closing {
+      text-align: center;
+      margin-top: 32px;
+      padding: 24px 32px;
+      background: linear-gradient(135deg, var(--sf-blue-dark) 0%, var(--sf-blue) 100%);
+      border-radius: var(--radius);
+      color: var(--sf-white);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--sf-gray-3);
+      padding: 24px;
+    }
+
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.4rem; }
+      .section { padding: 20px 16px; }
+      .cadence-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Global PS COE — FY27</div>
+  <h1>Your COE Solutioning Advisor</h1>
+  <p class="subtitle">A Field Partnership Guide for OU Leaders</p>
+  <p class="meta">Global Professional Services Solutioning Center of Excellence &nbsp;·&nbsp; June 2026</p>
+</header>
+
+<div class="container">
+
+  <!-- What is the COE Advisor -->
+  <div class="section">
+    <h2>
+      <span class="section-icon" style="background: var(--sf-blue-light); color: var(--sf-blue);">?</span>
+      What is the COE Advisor?
+    </h2>
+    <p>Your dedicated COE Solutioning Advisor is an embedded field partner — a senior practitioner focused on one Operating Unit who bridges global scoping standards with the realities of your pipeline. The Advisor role exists because strategy only moves deals if it lives in the field, not in a slide deck.</p>
+    <p>Think of this as having a specialist in your corner who brings the full weight of cross-cloud, cross-OU pattern intelligence to your most complex moments.</p>
+  </div>
+
+  <!-- What We Do Together -->
+  <div class="section">
+    <h2>
+      <span class="section-icon" style="background: var(--sf-teal-light); color: var(--sf-teal);">&#10003;</span>
+      What We Do Together
+    </h2>
+    <div class="do-grid">
+      <div class="do-item">
+        <div class="do-dot" style="background: var(--sf-blue);"></div>
+        <div class="do-content">
+          <strong>Shape complex opportunities early</strong>
+          <span>Pressure-test scope, surface risk, and align delivery assumptions before they become problems.</span>
+        </div>
+      </div>
+      <div class="do-item">
+        <div class="do-dot" style="background: var(--sf-teal);"></div>
+        <div class="do-content">
+          <strong>Strengthen commercial architecture</strong>
+          <span>Connect deal structure to margin predictability and package offerings in ways that reduce exposure.</span>
+        </div>
+      </div>
+      <div class="do-item">
+        <div class="do-dot" style="background: var(--sf-purple);"></div>
+        <div class="do-content">
+          <strong>Accelerate solution and delivery design</strong>
+          <span>Apply proven delivery patterns so your teams aren't building from scratch on every engagement.</span>
+        </div>
+      </div>
+      <div class="do-item">
+        <div class="do-dot" style="background: var(--sf-orange);"></div>
+        <div class="do-content">
+          <strong>Activate practice and domain depth</strong>
+          <span>Bring in the right specialty overlay at the right moment, not as a late escalation.</span>
+        </div>
+      </div>
+      <div class="do-item">
+        <div class="do-dot" style="background: var(--sf-green);"></div>
+        <div class="do-content">
+          <strong>Build agentic readiness</strong>
+          <span>Help your teams scope, price, and position AI and Agentic solutions with confidence.</span>
+        </div>
+      </div>
+      <div class="do-item">
+        <div class="do-dot" style="background: var(--sf-blue-dark);"></div>
+        <div class="do-content">
+          <strong>Return intelligence upward</strong>
+          <span>Your frontline patterns and friction points inform how the COE evolves global standards.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What This Is Not -->
+  <div class="section">
+    <h2>
+      <span class="section-icon" style="background: var(--sf-red-light); color: var(--sf-red);">&#10005;</span>
+      What This Is Not
+    </h2>
+    <div class="not-box">
+      This is not an audit. The Advisor is not here to review your deals for compliance, flag your team for non-standard scoping, or report back to leadership on what you're doing wrong. There is no scorecard. The engagement works best when it's candid — which means the value you get is directly proportional to how openly you bring your real challenges into the room.
+    </div>
+  </div>
+
+  <!-- Cadence -->
+  <div class="section">
+    <h2>
+      <span class="section-icon" style="background: var(--sf-blue-light); color: var(--sf-blue);">&#128197;</span>
+      Our Engagement Cadence
+    </h2>
+    <div class="cadence-grid">
+      <div class="cadence-item tier-1">
+        <div class="cadence-header">Tier 1 &mdash; GM</div>
+        <div class="cadence-body">
+          <div class="freq">Quarterly</div>
+          <div class="audience">OU General Manager</div>
+          <p>Strategic update on Advisor activities, tooling and policy changes, accomplishments, and focus areas for the next quarter.</p>
+        </div>
+      </div>
+      <div class="cadence-item tier-2">
+        <div class="cadence-header">Tier 2 &mdash; Sector Leaders</div>
+        <div class="cadence-body">
+          <div class="freq">Weekly</div>
+          <div class="audience">GM's Sector Leaders</div>
+          <p>Advisor participates in the existing weekly forecasting call to stay current on pipeline and identify where COE support adds value.</p>
+        </div>
+      </div>
+      <div class="cadence-item tier-3">
+        <div class="cadence-header">Tier 3 &mdash; COE Champions</div>
+        <div class="cadence-body">
+          <div class="freq">Monthly</div>
+          <div class="audience">SSSL &amp; SSSA Champions</div>
+          <p>Working session with practitioner-level Champions to share tooling updates, check on adoption, and gather honest feedback from the field.</p>
+        </div>
+      </div>
+    </div>
+    <p class="cadence-note">Between sessions, the Advisor is reachable for time-sensitive deal support. The structured cadence is a floor, not a ceiling.</p>
+  </div>
+
+  <!-- What Success Looks Like -->
+  <div class="section">
+    <h2>
+      <span class="section-icon" style="background: var(--sf-green-light); color: var(--sf-green);">&#8593;</span>
+      What Success Looks Like
+    </h2>
+    <div class="success-grid">
+      <div class="success-item">
+        <div class="success-num">01</div>
+        <strong>Faster time-to-scope</strong>
+        <p>Move from qualified opportunity to confident proposal without the rework cycles.</p>
+      </div>
+      <div class="success-item teal">
+        <div class="success-num">02</div>
+        <strong>Tighter margin predictability</strong>
+        <p>Scope assumptions hold through delivery. Change orders reflect customer additions, not original misses.</p>
+      </div>
+      <div class="success-item purple">
+        <div class="success-num">03</div>
+        <strong>Higher packaged offer adoption</strong>
+        <p>Your pipeline reflects the full breadth of what Salesforce Professional Services can deliver.</p>
+      </div>
+      <div class="success-item green">
+        <div class="success-num">04</div>
+        <strong>A smarter feedback loop</strong>
+        <p>Your OU's challenges directly shape how the COE refines its tools, templates, and guidance.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to Get the Most -->
+  <div class="section">
+    <h2>
+      <span class="section-icon" style="background: var(--sf-orange-light); color: var(--sf-orange);">&#9733;</span>
+      How to Get the Most Out of This Partnership
+    </h2>
+    <div class="ask-list">
+      <div class="ask-item">
+        <div class="ask-num">1</div>
+        <div class="ask-content">
+          <strong>Bring things early</strong>
+          <p>The Advisor adds the most value before a scope is locked, not after a customer has pushed back on it.</p>
+        </div>
+      </div>
+      <div class="ask-item">
+        <div class="ask-num">2</div>
+        <div class="ask-content">
+          <strong>Be direct about where the friction is</strong>
+          <p>Whether it's a pricing model that doesn't fit, a delivery pattern that keeps failing, or a capability your team doesn't feel confident positioning — that's exactly the conversation this partnership is designed for.</p>
+        </div>
+      </div>
+      <div class="ask-item">
+        <div class="ask-num">3</div>
+        <div class="ask-content">
+          <strong>Loop in the Advisor on deals that feel novel</strong>
+          <p>If your team is solving a problem it hasn't seen before, that's a signal — not a reason to figure it out alone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    Questions about how the Advisor engagement works? Reach out directly — that's what we're here for.
+  </div>
+
+</div>
+
+<footer>
+  Global PS COE &nbsp;·&nbsp; COE Advisor OU Partnership Guide &nbsp;·&nbsp; FY27
+</footer>
+
+</body>
+</html>
