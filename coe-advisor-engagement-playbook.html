@@ -532,44 +532,81 @@
 
     <p>The first 30 days are about listening, mapping, and establishing trust. Resist the urge to fix things immediately.</p>
 
-    <div class="timeline">
+    <!-- Visual horizontal timeline -->
+    <div style="margin: 28px 0 32px; overflow-x: auto;">
+      <div style="min-width: 560px;">
 
-      <div class="timeline-item">
-        <div class="timeline-dot blue">1–10</div>
-        <div class="timeline-content">
-          <h4>Days 1 to 10: Listen and Map</h4>
-          <ul>
-            <li>Meet individually with OU leadership and at least three Engagement Managers. Ask about their biggest scoping and delivery headaches, their relationship with Sales and SEs, and current tool and process friction.</li>
-            <li>Shadow two active scoping cycles from Stage 2 through to SOW. Do not intervene. Observe what actually happens versus what the process says should happen.</li>
-            <li>Identify one or two quick wins that are within your power to help solve now. These do not need to be strategic. They need to be real.</li>
-          </ul>
+        <!-- Day markers -->
+        <div style="display: flex; align-items: center; margin-bottom: 0; position: relative; padding: 0 40px;">
+          <!-- connecting line -->
+          <div style="position: absolute; top: 20px; left: 80px; right: 80px; height: 4px; background: linear-gradient(90deg, var(--sf-blue), var(--sf-teal), var(--sf-purple)); border-radius: 2px; z-index: 0;"></div>
+
+          <!-- Phase 1 node -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--sf-blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem; box-shadow: 0 0 0 4px var(--sf-blue-light);">1–10</div>
+            <div style="margin-top: 10px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--sf-blue);">Days 1–10</div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--sf-blue-dark); margin-top: 2px;">Listen &amp; Map</div>
+          </div>
+
+          <!-- midpoint label -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1;">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--sf-gray-2); border: 3px solid var(--sf-white);"></div>
+            <div style="margin-top: 14px; font-size: 0.72rem; color: var(--sf-gray-3);">Day 10</div>
+          </div>
+
+          <!-- Phase 2 node -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--sf-teal); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem; box-shadow: 0 0 0 4px var(--sf-teal-light);">11–20</div>
+            <div style="margin-top: 10px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--sf-teal);">Days 11–20</div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: #04837b; margin-top: 2px;">Calibrate &amp; Build</div>
+          </div>
+
+          <!-- midpoint label -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1;">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--sf-gray-2); border: 3px solid var(--sf-white);"></div>
+            <div style="margin-top: 14px; font-size: 0.72rem; color: var(--sf-gray-3);">Day 20</div>
+          </div>
+
+          <!-- Phase 3 node -->
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--sf-purple); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem; box-shadow: 0 0 0 4px var(--sf-purple-light);">21–30</div>
+            <div style="margin-top: 10px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--sf-purple);">Days 21–30</div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--sf-purple); margin-top: 2px;">Intelligence Loop</div>
+          </div>
+        </div>
+
+        <!-- Activity cards below the timeline -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px;">
+
+          <!-- Phase 1 activities -->
+          <div style="background: var(--sf-blue-light); border-radius: var(--radius); padding: 16px 18px; border-top: 3px solid var(--sf-blue);">
+            <ul style="padding-left: 16px; margin: 0;">
+              <li style="font-size: 0.86rem; color: var(--sf-text); margin-bottom: 8px;">Meet individually with OU leadership and at least three Engagement Managers — surface scoping headaches, SE/Sales relationship, and tool friction.</li>
+              <li style="font-size: 0.86rem; color: var(--sf-text); margin-bottom: 8px;">Shadow two active scoping cycles from Stage 2 through to SOW. Observe; do not intervene.</li>
+              <li style="font-size: 0.86rem; color: var(--sf-text);">Identify one or two quick wins within your power to solve now. They do not need to be strategic — they need to be real.</li>
+            </ul>
+          </div>
+
+          <!-- Phase 2 activities -->
+          <div style="background: var(--sf-teal-light); border-radius: var(--radius); padding: 16px 18px; border-top: 3px solid var(--sf-teal);">
+            <ul style="padding-left: 16px; margin: 0;">
+              <li style="font-size: 0.86rem; color: var(--sf-text); margin-bottom: 8px;">Complete a current-state map of the OU's scoping process — steps, tools in use, and where informal judgment calls are being made.</li>
+              <li style="font-size: 0.86rem; color: var(--sf-text); margin-bottom: 8px;">Identify gaps between OU practice and COE global standards. Prioritize by impact, not completeness.</li>
+              <li style="font-size: 0.86rem; color: var(--sf-text);">Establish your three-tier cadence. Run first Tier 2 and Tier 3 sessions. Spend the majority of the time listening.</li>
+            </ul>
+          </div>
+
+          <!-- Phase 3 activities -->
+          <div style="background: var(--sf-purple-light); border-radius: var(--radius); padding: 16px 18px; border-top: 3px solid var(--sf-purple);">
+            <ul style="padding-left: 16px; margin: 0;">
+              <li style="font-size: 0.86rem; color: var(--sf-text); margin-bottom: 8px;">Define how you will capture and transmit field intelligence — lightweight intake for systemic issues, regular reporting format for your COE lead.</li>
+              <li style="font-size: 0.86rem; color: var(--sf-text); margin-bottom: 8px;">Identify which COE priorities are most relevant to your OU: Scoping Process, Quantum Leap metrics, Efficiency Agent rollout, or ARI Nomination clarity.</li>
+              <li style="font-size: 0.86rem; color: var(--sf-text);">Share a 30-day summary with OU leadership and your COE lead — a shared starting point, not a formal report.</li>
+            </ul>
+          </div>
+
         </div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot teal">11–20</div>
-        <div class="timeline-content">
-          <h4>Days 11 to 20: Calibrate and Build</h4>
-          <ul>
-            <li>Complete a current-state map of the OU's scoping process. Document the steps, the tools in use, and where judgment calls are being made informally.</li>
-            <li>Identify gaps between the OU's current practice and COE global standards. Prioritize by impact, not completeness.</li>
-            <li>Establish your engagement cadence across all three tiers. Run the first Tier 2 and Tier 3 sessions using the agenda templates above. Spend the majority of the time on listening.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot purple">21–30</div>
-        <div class="timeline-content">
-          <h4>Days 21 to 30: Establish Your Field Intelligence Loop</h4>
-          <ul>
-            <li>Define how you will capture and transmit field intelligence back to the COE — including a lightweight intake mechanism for surfacing systemic issues and a regular reporting format for your COE lead.</li>
-            <li>Identify which COE priorities are most relevant to your OU right now: Scoping Process standardization, Quantum Leap metrics capture, Efficiency Agent rollout readiness, or ARI Nomination Process clarity. Document your OU's current position on each.</li>
-            <li>Share a 30-day summary with both your OU leadership and your COE lead. This is not a formal report — it is a shared understanding of where you are starting from and what you will focus on first.</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </div>
 
