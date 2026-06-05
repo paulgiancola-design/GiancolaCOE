@@ -265,6 +265,22 @@
       font-weight: 500;
     }
 
+    /* Source column tags */
+    .src-pill {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+    .src-boston1  { background: #ede9fe; color: #5b21b6; }
+    .src-boston2  { background: #ddd6fe; color: #4c1d95; }
+    .src-kedar    { background: #dcfce7; color: #166534; }
+    .src-advisor  { background: #fef3c7; color: #92400e; }
+    .src-gtm      { background: #dbeafe; color: #1e40af; }
+
     /* hidden row for JS filter */
     tr.hidden { display: none; }
 
@@ -330,10 +346,11 @@
     <table id="main-table">
       <thead>
         <tr>
-          <th style="width:30%">Item</th>
-          <th style="width:13%">Type</th>
-          <th style="width:17%">Importance</th>
-          <th style="width:40%">Rationale &amp; Source</th>
+          <th style="width:27%">Item</th>
+          <th style="width:12%">Type</th>
+          <th style="width:14%">Importance</th>
+          <th style="width:32%">Rationale</th>
+          <th style="width:15%">Source Documents</th>
         </tr>
       </thead>
       <tbody>
@@ -349,13 +366,12 @@
             <div class="imp-label imp-critical">Critical</div>
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
+          <td>Beta showed 62% time savings; admin hours cut from 8 to 1–3. Named as an immediate COE action item at the Boston Offsite Day 2 and the Advisor Kickoff. COE owns QA Round 2, deploy, and adoption push. The handoff gap is explicitly listed as a "closed loop" failure point in the Boston sessions.</td>
           <td>
-            Beta showed 62% time savings; admin hours cut from 8 to 1–3. Named as an immediate COE action item at the Boston Offsite Day 2 and the Advisor Kickoff. COE owns QA Round 2, deploy, and adoption push. The handoff gap is explicitly listed as a "closed loop" failure point in the Boston sessions.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">Advisor Kickoff</span>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
           </td>
         </tr>
 
@@ -371,12 +387,12 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            Central agenda item across all five sessions. COE owns methodology, tools, productivity reporting, and solutioning tracks. 20 pilot projects in flight. Target: referenceable data by La Lima. Boston Day 1 explicitly: "Waterfall is the default — QL is the answer but it is narrow and inconsistent."
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">GTM Summit</span>
+            Central agenda item across all five sessions. COE owns methodology, tools, productivity reporting, and solutioning tracks. 20 pilot projects in flight. Target: referenceable data by La Lima. Boston Day 1 explicitly: "Waterfall is the default — QL is the answer but it is narrow and inconsistent."</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-gtm">GTM Summit</span>
           </td>
         </tr>
 
@@ -392,13 +408,13 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            COE Immediate Priority #1 per Boston Day 2 session. Advisor Kickoff tasked team with evaluating four tools against rubric. Scopezilla is the data source for Quantum Leap and actively in use for Lumen and AT&T. Drives pre-sale estimation accuracy and Day Zero readiness.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Advisor Kickoff</span>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">GTM Summit</span>
+            COE Immediate Priority #1 per Boston Day 2 session. Advisor Kickoff tasked team with evaluating four tools against rubric. Scopezilla is the data source for Quantum Leap and actively in use for Lumen and AT&T. Drives pre-sale estimation accuracy and Day Zero readiness.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-gtm">GTM Summit</span>
           </td>
         </tr>
 
@@ -414,10 +430,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            Formally adopted at Boston Day 1 as a new sales motion ("Seed, Attach, Grow, Expand"). Boston Day 2 identified absence of this motion as a root cause of revenue gaps. COE must build and federate the playbook, templates, and pricing guidance so all OUs can execute the smaller, faster deal structure that Quantum Leap enables.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
+            Formally adopted at Boston Day 1 as a new sales motion ("Seed, Attach, Grow, Expand"). Boston Day 2 identified absence of this motion as a root cause of revenue gaps. COE must build and federate the playbook, templates, and pricing guidance so all OUs can execute the smaller, faster deal structure that Quantum Leap enables.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
           </td>
         </tr>
 
@@ -433,10 +449,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            Katherine presented a visual of the current approval process at Boston Day 2 — described as an "insane" infinite loop with vague queue names. Boston Day 1 aligned on forming a bureaucracy reduction working group. Estimation and approval standards deferred for further COE-led discussion. Blocking deal velocity and Quantum Leap commercialization.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
+            Katherine presented a visual of the current approval process at Boston Day 2 — described as an "insane" infinite loop with vague queue names. Boston Day 1 aligned on forming a bureaucracy reduction working group. Estimation and approval standards deferred for further COE-led discussion. Blocking deal velocity and Quantum Leap commercialization.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
           </td>
         </tr>
 
@@ -452,11 +468,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            COE Immediate Priority #2 per Boston Day 2. Boston Day 2 decision: shift AI tool strategy from direct standardization to providing visibility and access while delegating official standardization. Joanie's remit in the Advisor Kickoff; Tiffany assigned naming conventions at Kedar Offsite. New tools emerge every two weeks — governance is existential.
-            <br>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Advisor Kickoff</span>
-            <span class="source-tag">Kedar Offsite</span>
+            COE Immediate Priority #2 per Boston Day 2. Boston Day 2 decision: shift AI tool strategy from direct standardization to providing visibility and access while delegating official standardization. Joanie's remit in the Advisor Kickoff; Tiffany assigned naming conventions at Kedar Offsite. New tools emerge every two weeks — governance is existential.</td>
+          <td>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -472,10 +488,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            Boston Day 2: "Value capture is the nexus point for prioritization — the organization has a significant deficit in tracking and reading back results." COE owns the "90-day look back" standard, the AI validation checklist (formally adopted), and the distinction between marketing stories and value stories.
-            <br>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
+            Boston Day 2: "Value capture is the nexus point for prioritization — the organization has a significant deficit in tracking and reading back results." COE owns the "90-day look back" standard, the AI validation checklist (formally adopted), and the distinction between marketing stories and value stories.</td>
+          <td>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -491,10 +507,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            COE Immediate Priority #3 per Boston Day 2 (feedback loops + QL tracking). Joe/Joseph/Joan assigned as reporting trio at Kedar Offsite. Boston Day 2: Lori is working on La Lima proof points alone — COE must support with structured reporting across all 20 QL pilots.
-            <br>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
+            COE Immediate Priority #3 per Boston Day 2 (feedback loops + QL tracking). Joe/Joseph/Joan assigned as reporting trio at Kedar Offsite. Boston Day 2: Lori is working on La Lima proof points alone — COE must support with structured reporting across all 20 QL pilots.</td>
+          <td>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -510,10 +526,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-critical"></div></div>
           </td>
           <td>
-            Launched the week following the GTM Summit. Cited as the flagship new GCO offer for Q2. Directly tied to revenue targets and the "agentic consulting firm" mandate. Boston Day 2 referenced the team's differentiation as "proximity to the product" — COE must articulate this in the T1–T3 packaging.
-            <br>
-            <span class="source-tag">GTM Summit</span>
-            <span class="source-tag">Boston Day 2</span>
+            Launched the week following the GTM Summit. Cited as the flagship new GCO offer for Q2. Directly tied to revenue targets and the "agentic consulting firm" mandate. Boston Day 2 referenced the team's differentiation as "proximity to the product" — COE must articulate this in the T1–T3 packaging.</td>
+          <td>
+            <span class="src-pill src-gtm">GTM Summit</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
           </td>
         </tr>
 
@@ -529,11 +545,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Boston Day 1: sales terminology shifted from "demo" to "prototype" — COE must update the solutioning playbook accordingly. Boston Day 2: team is standardizing deliverables (working prototypes and business value readouts) during the sales process. "Solutioning CoE" explicitly named as owner. Penn State is the first live deal.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
+            Boston Day 1: sales terminology shifted from "demo" to "prototype" — COE must update the solutioning playbook accordingly. Boston Day 2: team is standardizing deliverables (working prototypes and business value readouts) during the sales process. "Solutioning CoE" explicitly named as owner. Penn State is the first live deal.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -549,10 +565,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Qualification tracker (Quantum Leap Tracker app) shown at Kedar Offsite with 24/31/36 customer cohorts. Boston Day 2 aligned on prioritizing simple, mature product use cases for the 20 QL pilots. COE owns criteria, scoring rubric, and cohort management globally.
-            <br>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
+            Qualification tracker (Quantum Leap Tracker app) shown at Kedar Offsite with 24/31/36 customer cohorts. Boston Day 2 aligned on prioritizing simple, mature product use cases for the 20 QL pilots. COE owns criteria, scoring rubric, and cohort management globally.</td>
+          <td>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -568,9 +584,9 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Boston Day 1: May AI Hackathon received 20+ submissions. Leadership formed the OU AI Champions Network and the Innovation Scoring Group. Boston Day 1: "We're going to score them and say this is the winner or combination — the COE will take that and scale it globally." Action item: crowdsource AI innovation, identify and document successful tools from each OU.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
+            Boston Day 1: May AI Hackathon received 20+ submissions. Leadership formed the OU AI Champions Network and the Innovation Scoring Group. Boston Day 1: "We're going to score them and say this is the winner or combination — the COE will take that and scale it globally." Action item: crowdsource AI innovation, identify and document successful tools from each OU.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
           </td>
         </tr>
 
@@ -586,11 +602,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            COE Immediate Priority #4 per Boston Day 2 (OU alignment). Boston Day 1: "Communication gaps — leadership might be inadvertently recreating the COE" without connecting to it. Advisor Kickoff action: maintain stakeholder connections with OU leaders and chiefs of staff to communicate global progress and gather needs.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Advisor Kickoff</span>
+            COE Immediate Priority #4 per Boston Day 2 (OU alignment). Boston Day 1: "Communication gaps — leadership might be inadvertently recreating the COE" without connecting to it. Advisor Kickoff action: maintain stakeholder connections with OU leaders and chiefs of staff to communicate global progress and gather needs.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
           </td>
         </tr>
 
@@ -606,11 +622,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Samir presented full architecture at Kedar Offsite. COE is the "AI CoE" entity in the control-plane diagram. Boston Day 1 aligned on limiting to 2–3 core tools per key task to move from experimentation to consistency. Prevents "agent bubble" technical debt.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">GTM Summit</span>
+            Samir presented full architecture at Kedar Offsite. COE is the "AI CoE" entity in the control-plane diagram. Boston Day 1 aligned on limiting to 2–3 core tools per key task to move from experimentation to consistency. Prevents "agent bubble" technical debt.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-gtm">GTM Summit</span>
           </td>
         </tr>
 
@@ -626,11 +642,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Liz Moravec demoed at Kedar Offsite. 73% higher project failure rate when 5+ risks identified early without review. Boston Day 2: "efficiency agents" like the risk assessment tool named as quick wins. Account Review process gaps discussed at length — current process is anecdotal, lacks proper qualification. COE owns scaling and field adoption.
-            <br>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">Advisor Kickoff</span>
+            Liz Moravec demoed at Kedar Offsite. 73% higher project failure rate when 5+ risks identified early without review. Boston Day 2: "efficiency agents" like the risk assessment tool named as quick wins. Account Review process gaps discussed at length — current process is anecdotal, lacks proper qualification. COE owns scaling and field adoption.</td>
+          <td>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
           </td>
         </tr>
 
@@ -646,10 +662,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Detailed roadmap shown at Kedar Offsite (May alpha → June beta → July/Aug GA). Eliminates SME bottlenecks and fragmented tribal knowledge. Boston Day 2: "Skills of the Future" workstream confirmed — COE must define job profiles, leveling guides, and the "Super SME" foundation.
-            <br>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
+            Detailed roadmap shown at Kedar Offsite (May alpha → June beta → July/Aug GA). Eliminates SME bottlenecks and fragmented tribal knowledge. Boston Day 2: "Skills of the Future" workstream confirmed — COE must define job profiles, leveling guides, and the "Super SME" foundation.</td>
+          <td>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -665,11 +681,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Boston Day 2 formal decision: standardize fixed-capacity model, treat T&M as exception. 85% of current work is T&M — critical transformation challenge. Boston Day 2: "This is a leadership and enablement challenge, not a skill gap." COE must prescribe the commercial framework, manage internal process barriers, and measure bid-vs.-delivered margin.
-            <br>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">GTM Summit</span>
+            Boston Day 2 formal decision: standardize fixed-capacity model, treat T&M as exception. 85% of current work is T&M — critical transformation challenge. Boston Day 2: "This is a leadership and enablement challenge, not a skill gap." COE must prescribe the commercial framework, manage internal process barriers, and measure bid-vs.-delivered margin.</td>
+          <td>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-gtm">GTM Summit</span>
           </td>
         </tr>
 
@@ -685,11 +701,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Formally adopted at Boston Day 1 as a cross-disciplinary subcommittee action. Boston Day 2 ran structured breakout sessions to identify JTBDs with AI tools. Advisor Kickoff action: prioritize and rank user JTBDs for the scoper persona. Underpins the scoping tool evaluation rubric and Quantum Leap methodology.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">Advisor Kickoff</span>
+            Formally adopted at Boston Day 1 as a cross-disciplinary subcommittee action. Boston Day 2 ran structured breakout sessions to identify JTBDs with AI tools. Advisor Kickoff action: prioritize and rank user JTBDs for the scoper persona. Underpins the scoping tool evaluation rubric and Quantum Leap methodology.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
           </td>
         </tr>
 
@@ -705,9 +721,9 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Karishma Lalwani demoed at Kedar Offsite. COE tasked with piloting across 2 OUs, linking output into PS engagement motions, and defining proactive go-to-market signals from telemetry.
-            <br>
-            <span class="source-tag">Kedar Offsite</span>
+            Karishma Lalwani demoed at Kedar Offsite. COE tasked with piloting across 2 OUs, linking output into PS engagement motions, and defining proactive go-to-market signals from telemetry.</td>
+          <td>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -723,11 +739,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-high"></div></div>
           </td>
           <td>
-            Boston Day 1 formal decision: all teams mandated to adopt AI-augmented development; include in all SOWs. Boston Day 2 adopted the AI validation checklist for go-to-market best practices. GTM readiness team found many employees hadn't installed basic AI tools. COE must audit AI usage and escalate non-adopters.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
-            <span class="source-tag">GTM Summit</span>
+            Boston Day 1 formal decision: all teams mandated to adopt AI-augmented development; include in all SOWs. Boston Day 2 adopted the AI validation checklist for go-to-market best practices. GTM readiness team found many employees hadn't installed basic AI tools. COE must audit AI usage and escalate non-adopters.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
+            <span class="src-pill src-gtm">GTM Summit</span>
           </td>
         </tr>
 
@@ -743,10 +759,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
           </td>
           <td>
-            Flagged as "Needs Further Discussion" at Kedar Offsite. Kedar, Joan, and Joseph tasked to meet and resolve. Needed to prevent fragmented customer experience as agent count scales to 100K skills. Mariella Volio's experience design work at COE Advisor Kickoff addresses the scoper persona UX.
-            <br>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">Advisor Kickoff</span>
+            Flagged as "Needs Further Discussion" at Kedar Offsite. Kedar, Joan, and Joseph tasked to meet and resolve. Needed to prevent fragmented customer experience as agent count scales to 100K skills. Mariella Volio's experience design work at COE Advisor Kickoff addresses the scoper persona UX.</td>
+          <td>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
           </td>
         </tr>
 
@@ -762,11 +778,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
           </td>
           <td>
-            Boston Day 1: Amar demoed "day in the life" of using Claude and Scopezilla to analyze RFP data, Jira tickets, and sandboxes — generating value even without discovery access. GTM Summit highlighted Claude Code for RFP Intelligence. COE must package this as a repeatable scoper workflow.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">GTM Summit</span>
-            <span class="source-tag">Advisor Kickoff</span>
+            Boston Day 1: Amar demoed "day in the life" of using Claude and Scopezilla to analyze RFP data, Jira tickets, and sandboxes — generating value even without discovery access. GTM Summit highlighted Claude Code for RFP Intelligence. COE must package this as a repeatable scoper workflow.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-gtm">GTM Summit</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
           </td>
         </tr>
 
@@ -782,10 +798,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
           </td>
           <td>
-            Formal decision at Kedar Offsite. Stephanie flagged agentic build speed routinely outpaces customer process evolution. Boston Day 1: customer accountability and "bad cop" dynamics cited as delivery friction. COE must prescribe the CM standard for all QL engagements.
-            <br>
-            <span class="source-tag">Kedar Offsite</span>
-            <span class="source-tag">Boston Day 1</span>
+            Formal decision at Kedar Offsite. Stephanie flagged agentic build speed routinely outpaces customer process evolution. Boston Day 1: customer accountability and "bad cop" dynamics cited as delivery friction. COE must prescribe the CM standard for all QL engagements.</td>
+          <td>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
+            <span class="src-pill src-boston1">Boston Day 1</span>
           </td>
         </tr>
 
@@ -801,11 +817,11 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
           </td>
           <td>
-            Boston Day 1: only 60% of the team uses AI tools; leadership set an "AI Skills Day" as a monthly practice. GTM Summit flagged 71% ACT course completion. Boston Day 1 action: establish anonymized training feedback loop to GCO. COE must establish this loop and enforce minimum training thresholds.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">GTM Summit</span>
-            <span class="source-tag">Kedar Offsite</span>
+            Boston Day 1: only 60% of the team uses AI tools; leadership set an "AI Skills Day" as a monthly practice. GTM Summit flagged 71% ACT course completion. Boston Day 1 action: establish anonymized training feedback loop to GCO. COE must establish this loop and enforce minimum training thresholds.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-gtm">GTM Summit</span>
+            <span class="src-pill src-kedar">Kedar Offsite</span>
           </td>
         </tr>
 
@@ -821,10 +837,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
           </td>
           <td>
-            Boston Day 1 formal decisions: DA role redefined and skills gap analysis adopted. "Skills of the Future" breakout group confirmed at Boston Day 2. Boston Day 1: significant gap in business acumen and "swagger" — COE must build leveling guides and role profiles that reflect AI-native delivery expectations.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Boston Day 2</span>
+            Boston Day 1 formal decisions: DA role redefined and skills gap analysis adopted. "Skills of the Future" breakout group confirmed at Boston Day 2. Boston Day 1: significant gap in business acumen and "swagger" — COE must build leveling guides and role profiles that reflect AI-native delivery expectations.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-boston2">Boston Day 2</span>
           </td>
         </tr>
 
@@ -840,10 +856,10 @@
             <div class="imp-bar-bg"><div class="imp-bar-fill fill-medium"></div></div>
           </td>
           <td>
-            Boston Day 1 critical concern: "the leadership team might be inadvertently recreating the COE." Action item: someone to own AI communications cascade and ensure the team is fully informed of global initiatives. Boston Day 1 noted "Method 3" AI transformation roadmap awareness is inconsistent across the field.
-            <br>
-            <span class="source-tag">Boston Day 1</span>
-            <span class="source-tag">Advisor Kickoff</span>
+            Boston Day 1 critical concern: "the leadership team might be inadvertently recreating the COE." Action item: someone to own AI communications cascade and ensure the team is fully informed of global initiatives. Boston Day 1 noted "Method 3" AI transformation roadmap awareness is inconsistent across the field.</td>
+          <td>
+            <span class="src-pill src-boston1">Boston Day 1</span>
+            <span class="src-pill src-advisor">Advisor Kickoff</span>
           </td>
         </tr>
 
