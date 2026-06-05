@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COE Advisor Engagement Playbook</title>
+  <style>
+    :root {
+      --sf-blue: #0176d3;
+      --sf-blue-dark: #014486;
+      --sf-blue-light: #e8f4fd;
+      --sf-teal: #06a59a;
+      --sf-teal-light: #e0f5f4;
+      --sf-purple: #5867e8;
+      --sf-purple-light: #f0f1fd;
+      --sf-orange: #dd7a01;
+      --sf-orange-light: #fff3e0;
+      --sf-green: #2e844a;
+      --sf-green-light: #eaf5ea;
+      --sf-red: #ba0517;
+      --sf-red-light: #fdf0f0;
+      --sf-gray-1: #f3f3f3;
+      --sf-gray-2: #dddbda;
+      --sf-gray-3: #706e6b;
+      --sf-text: #181818;
+      --sf-white: #ffffff;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--sf-text);
+      background: var(--sf-gray-1);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--sf-blue-dark) 0%, var(--sf-blue) 100%);
+      color: var(--sf-white);
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+
+    header .badge {
+      display: inline-block;
+      background: var(--sf-teal);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    header p.subtitle { font-size: 1.05rem; opacity: 0.85; }
+    header .meta { margin-top: 16px; font-size: 0.9rem; opacity: 0.75; }
+
+    /* Nav */
+    nav {
+      background: var(--sf-white);
+      border-bottom: 2px solid var(--sf-blue-light);
+      padding: 0 32px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      justify-content: center;
+    }
+
+    nav a {
+      display: block;
+      padding: 14px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--sf-gray-3);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    nav a:hover { color: var(--sf-blue); border-bottom-color: var(--sf-blue-light); }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+
+    .section {
+      background: var(--sf-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--sf-blue-dark);
+      border-bottom: 2px solid var(--sf-blue-light);
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--sf-blue);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .section h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sf-blue);
+      margin: 22px 0 10px;
+    }
+
+    .section p { margin-bottom: 12px; font-size: 0.95rem; }
+    .section p:last-child { margin-bottom: 0; }
+
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    ul li { font-size: 0.95rem; margin-bottom: 6px; }
+
+    .highlight-box {
+      border-left: 4px solid var(--sf-blue);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.93rem;
+    }
+    .highlight-box.blue { background: var(--sf-blue-light); border-left-color: var(--sf-blue); }
+    .highlight-box.teal { background: var(--sf-teal-light); border-left-color: var(--sf-teal); }
+    .highlight-box.orange { background: var(--sf-orange-light); border-left-color: var(--sf-orange); }
+    .highlight-box.green { background: var(--sf-green-light); border-left-color: var(--sf-green); }
+    .highlight-box.purple { background: var(--sf-purple-light); border-left-color: var(--sf-purple); }
+
+    /* Principles grid */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .principle-card {
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      border-top: 4px solid var(--sf-blue);
+    }
+    .principle-card.blue { background: var(--sf-blue-light); border-top-color: var(--sf-blue); }
+    .principle-card.teal { background: var(--sf-teal-light); border-top-color: var(--sf-teal); }
+    .principle-card.purple { background: var(--sf-purple-light); border-top-color: var(--sf-purple); }
+    .principle-card.orange { background: var(--sf-orange-light); border-top-color: var(--sf-orange); }
+    .principle-card.green { background: var(--sf-green-light); border-top-color: var(--sf-green); }
+
+    .principle-card h4 {
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--sf-blue-dark);
+      margin-bottom: 6px;
+    }
+    .principle-card.teal h4 { color: #04837b; }
+    .principle-card.purple h4 { color: var(--sf-purple); }
+    .principle-card.orange h4 { color: #c45500; }
+    .principle-card.green h4 { color: var(--sf-green); }
+    .principle-card p { font-size: 0.88rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* Tier cards */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .tier-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--sf-gray-2);
+      overflow: hidden;
+    }
+
+    .tier-card .tier-header {
+      padding: 14px 18px;
+      color: #fff;
+      font-weight: 700;
+    }
+    .tier-card.tier-1 .tier-header { background: var(--sf-blue-dark); }
+    .tier-card.tier-2 .tier-header { background: var(--sf-teal); }
+    .tier-card.tier-3 .tier-header { background: var(--sf-purple); }
+
+    .tier-card .tier-header .tier-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 2px;
+    }
+
+    .tier-card .tier-header .tier-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .tier-card .tier-header .tier-cadence {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      opacity: 0.85;
+      font-weight: 400;
+    }
+
+    .tier-card .tier-body {
+      padding: 16px 18px;
+      font-size: 0.9rem;
+      background: var(--sf-white);
+    }
+
+    .tier-card .tier-body p { margin-bottom: 10px; color: var(--sf-gray-3); font-size: 0.88rem; }
+    .tier-card .tier-body strong { color: var(--sf-text); }
+    .tier-card .tier-body ul { margin: 8px 0; }
+    .tier-card .tier-body ul li { font-size: 0.87rem; color: var(--sf-gray-3); margin-bottom: 4px; }
+
+    /* 30-day timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 10px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding-bottom: 24px;
+      position: relative;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: 0;
+      width: 2px;
+      background: var(--sf-gray-2);
+    }
+
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.78rem;
+      flex-shrink: 0;
+      color: #fff;
+      z-index: 1;
+    }
+
+    .timeline-dot.blue { background: var(--sf-blue); }
+    .timeline-dot.teal { background: var(--sf-teal); }
+    .timeline-dot.purple { background: var(--sf-purple); }
+
+    .timeline-content { flex: 1; padding-top: 8px; }
+    .timeline-content h4 { font-size: 0.95rem; font-weight: 700; color: var(--sf-text); margin-bottom: 8px; }
+    .timeline-content ul { padding-left: 18px; }
+    .timeline-content ul li { font-size: 0.9rem; color: var(--sf-gray-3); margin-bottom: 5px; }
+
+    /* Workstream list */
+    .workstream-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .workstream-item {
+      background: var(--sf-gray-1);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      border-left: 4px solid var(--sf-blue);
+    }
+    .workstream-item.teal { border-left-color: var(--sf-teal); }
+    .workstream-item.purple { border-left-color: var(--sf-purple); }
+    .workstream-item.orange { border-left-color: var(--sf-orange); }
+    .workstream-item.green { border-left-color: var(--sf-green); }
+
+    .workstream-item h4 { font-size: 0.93rem; font-weight: 700; color: var(--sf-blue-dark); margin-bottom: 6px; }
+    .workstream-item.teal h4 { color: #04837b; }
+    .workstream-item.purple h4 { color: var(--sf-purple); }
+    .workstream-item.orange h4 { color: #c45500; }
+    .workstream-item.green h4 { color: var(--sf-green); }
+    .workstream-item p { font-size: 0.87rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* Intelligence cards */
+    .intel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .intel-card {
+      background: var(--sf-blue-light);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .intel-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--sf-blue-dark); margin-bottom: 6px; }
+    .intel-card p { font-size: 0.86rem; color: var(--sf-gray-3); margin: 0; }
+
+    /* What we don't do */
+    .dont-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .dont-item {
+      display: flex;
+      gap: 14px;
+      background: var(--sf-gray-1);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      align-items: flex-start;
+    }
+
+    .dont-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: var(--sf-red-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sf-red);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    .dont-content { flex: 1; }
+    .dont-content strong { display: block; font-size: 0.93rem; color: var(--sf-text); margin-bottom: 4px; }
+    .dont-content p { font-size: 0.88rem; color: var(--sf-gray-3); margin: 0; }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--sf-gray-3);
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .section { padding: 20px 16px; }
+      nav a { padding: 12px 12px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Global PS COE — FY27</div>
+  <h1>COE Advisor Engagement Playbook</h1>
+  <p class="subtitle">Field Engagement Guide for COE Solutioning Advisors</p>
+  <p class="meta">Global Professional Services Solutioning Center of Excellence &nbsp;·&nbsp; June 2026</p>
+</header>
+
+<nav>
+  <a href="#role">1. Role</a>
+  <a href="#principles">2. Principles</a>
+  <a href="#cadence">3. Cadence</a>
+  <a href="#30days">4. First 30 Days</a>
+  <a href="#workstreams">5. Workstreams</a>
+  <a href="#intelligence">6. Field Intelligence</a>
+  <a href="#dont">7. What We Don't Do</a>
+</nav>
+
+<div class="container">
+
+  <!-- Section 1: Role -->
+  <div class="section" id="role">
+    <h2><span class="section-number">1</span> Purpose &amp; Role of the COE Advisor</h2>
+
+    <div class="highlight-box blue">
+      <strong>The mission:</strong> "Critical connective tissue between strategy and execution" — embedding directly in the field to drive adoption of global scoping standards, coach field teams on complex engagements, and bring frontline intelligence back to the COE.
+    </div>
+
+    <p>The COE Solutioning Advisor is the field-facing arm of the Professional Services Solutioning Center of Excellence. You are not an auditor, a gatekeeper, or a policy enforcer. You are a practitioner embedded in the Operating Unit — someone who has earned a seat at the table by making the field's work faster, better, and less painful.</p>
+
+    <p>Your mandate is to close the gap between global standards and day-to-day execution. That means translating COE-level strategy into guidance that is actionable in the context of your specific OU, and carrying intelligence from the field back to the COE so that standards improve over time. You are, in the truest sense, connective tissue.</p>
+
+    <p>You report into the COE but operate in the field. This dual accountability is a feature, not a bug. It means you bring credibility in both directions: the field trusts you because you understand their realities, and the COE trusts you because you hold global standards. Managing that tension well is the job.</p>
+
+    <p>You are dedicated to a single OU. You know its leadership, its deal pipeline, its delivery pressures, and its cultural quirks. You attend their meetings, read their deals, and understand the difference between a process problem and a people problem. You do not parachute in.</p>
+
+    <div class="highlight-box teal">
+      <strong>Tool adoption accountability:</strong> A core part of your role is driving measurable adoption of COE-sanctioned tools and tracking whether that adoption is producing results. You are not just introducing tools — you are accountable for understanding how they are being used, where adoption is stalling, and what is getting in the way. This means establishing baselines, tracking utilization over time, and connecting tool adoption to tangible outcomes: faster time-to-scope, higher estimate accuracy, reduced rework. If a tool is not being adopted, your job is to find out why — whether that is a training gap, a fit problem, or field resistance — and address it directly.
+    </div>
+
+    <p>Your work spans five workstreams: Operations, Commercial Architecture, Solution and Delivery Design, Practice and Domain Overlay, and Agentic Enablement and Insights.</p>
+  </div>
+
+  <!-- Section 2: Principles -->
+  <div class="section" id="principles">
+    <h2><span class="section-number">2</span> Engagement Principles: How to Show Up as a Trusted Partner</h2>
+
+    <p>The single biggest risk to your effectiveness is being perceived as a policing committee with a headcount. Counter this from day one.</p>
+
+    <div class="principles-grid">
+      <div class="principle-card blue">
+        <h4>Lead with help, not compliance</h4>
+        <p>Every conversation with the field should start from the question: what is making your work harder right now? Standards matter, but they land better when the field has already experienced your value firsthand.</p>
+      </div>
+      <div class="principle-card teal">
+        <h4>Be field-first in how you communicate</h4>
+        <p>Practitioners do not need to hear about the COE's mission or FY27 priorities in your first five interactions. Earn the right to introduce the standard after you have demonstrated that you understand their context.</p>
+      </div>
+      <div class="principle-card orange">
+        <h4>Name the pain points openly</h4>
+        <p>Tool proliferation, guidance gaps, and process friction are known problems. Validate them, document them, and bring them back to the COE as actionable signal. The field will trust you more when they see raising a problem results in something changing.</p>
+      </div>
+      <div class="principle-card purple">
+        <h4>Distinguish between rigor and rigidity</h4>
+        <p>Global standards exist to create consistency at scale — not to override field judgment on every deal. Know which standards are non-negotiable and which are defaults. Be clear with the field about the difference.</p>
+      </div>
+      <div class="principle-card green">
+        <h4>Create psychological safety for honest feedback</h4>
+        <p>Your role is to surface systemic issues, not to flag individuals. Field teams will not tell you what is actually broken if they believe you will use that information against them. Make that clear — and make it true.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Cadence -->
+  <div class="section" id="cadence">
+    <h2><span class="section-number">3</span> Engagement Cadence: Three-Tier Model</h2>
+
+    <p>The Advisor's engagement with the OU operates across three distinct tiers, each serving a different audience and purpose. Together they create a connected rhythm from executive alignment down to practitioner-level adoption.</p>
+
+    <div class="tier-grid">
+
+      <!-- Tier 1 -->
+      <div class="tier-card tier-1">
+        <div class="tier-header">
+          <div class="tier-label">Tier 1</div>
+          <div class="tier-title">OU General Manager</div>
+          <div class="tier-cadence">Quarterly Executive Update</div>
+        </div>
+        <div class="tier-body">
+          <p><strong>Audience:</strong> OU General Manager</p>
+          <p>The quarterly meeting is the Advisor's opportunity to report up: what has been accomplished, what tools or policies have been introduced or updated, and where focus will shift in the coming quarter. Come prepared with a concise summary of impact — grounded in data — and a clear view of what you need from GM-level support.</p>
+          <strong>Typical agenda:</strong>
+          <ul>
+            <li>Accomplishments since last meeting (tooling rollouts, process improvements, adoption gains)</li>
+            <li>Active policy or standards updates relevant to the OU</li>
+            <li>Focus areas for the next quarter</li>
+            <li>Escalations or blockers requiring GM visibility or sponsorship</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="tier-card tier-2">
+        <div class="tier-header">
+          <div class="tier-label">Tier 2</div>
+          <div class="tier-title">Sector Leaders</div>
+          <div class="tier-cadence">Weekly Forecasting Participation</div>
+        </div>
+        <div class="tier-body">
+          <p><strong>Audience:</strong> GM's sector leaders (existing forecasting call)</p>
+          <p>The Advisor participates in the sector leaders' existing forecasting process — not a separate meeting. Being present in the weekly forecast is how the Advisor stays connected to what is actually in motion.</p>
+          <strong>The Advisor's role in this meeting:</strong>
+          <ul>
+            <li>Listen for deals that warrant deeper scoping support or commercial architecture coaching</li>
+            <li>Identify patterns in pipeline composition that signal where COE tools could accelerate velocity</li>
+            <li>Offer targeted input when a deal falls into a known COE focus area</li>
+            <li>Avoid dominating the conversation — this is the OU's meeting</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="tier-card tier-3">
+        <div class="tier-header">
+          <div class="tier-label">Tier 3</div>
+          <div class="tier-title">COE Champions</div>
+          <div class="tier-cadence">Monthly Practitioner Feedback Loop</div>
+        </div>
+        <div class="tier-body">
+          <p><strong>Audience:</strong> COE Champions from the SSSL and SSSA ranks</p>
+          <p>COE Champions are the Advisor's eyes and ears inside the OU. This monthly meeting is a two-way working session — the Advisor brings COE updates; Champions bring honest feedback on what is landing and what the field actually needs.</p>
+          <strong>Typical agenda:</strong>
+          <ul>
+            <li>Tooling updates: what is new, what has changed, how to use it</li>
+            <li>Adoption check-in: where are Champions seeing uptake, where is there resistance and why</li>
+            <li>Recommended areas of focus based on what Champions see in active deals</li>
+            <li>Open forum: friction points, guidance gaps, questions from the broader practitioner community</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 4: First 30 Days -->
+  <div class="section" id="30days">
+    <h2><span class="section-number">4</span> First 30 Days: Getting Started with Your OU</h2>
+
+    <p>The first 30 days are about listening, mapping, and establishing trust. Resist the urge to fix things immediately.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot blue">1–10</div>
+        <div class="timeline-content">
+          <h4>Days 1 to 10: Listen and Map</h4>
+          <ul>
+            <li>Meet individually with OU leadership and at least three Engagement Managers. Ask about their biggest scoping and delivery headaches, their relationship with Sales and SEs, and current tool and process friction.</li>
+            <li>Shadow two active scoping cycles from Stage 2 through to SOW. Do not intervene. Observe what actually happens versus what the process says should happen.</li>
+            <li>Identify one or two quick wins that are within your power to help solve now. These do not need to be strategic. They need to be real.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot teal">11–20</div>
+        <div class="timeline-content">
+          <h4>Days 11 to 20: Calibrate and Build</h4>
+          <ul>
+            <li>Complete a current-state map of the OU's scoping process. Document the steps, the tools in use, and where judgment calls are being made informally.</li>
+            <li>Identify gaps between the OU's current practice and COE global standards. Prioritize by impact, not completeness.</li>
+            <li>Establish your engagement cadence across all three tiers. Run the first Tier 2 and Tier 3 sessions using the agenda templates above. Spend the majority of the time on listening.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot purple">21–30</div>
+        <div class="timeline-content">
+          <h4>Days 21 to 30: Establish Your Field Intelligence Loop</h4>
+          <ul>
+            <li>Define how you will capture and transmit field intelligence back to the COE — including a lightweight intake mechanism for surfacing systemic issues and a regular reporting format for your COE lead.</li>
+            <li>Identify which COE priorities are most relevant to your OU right now: Scoping Process standardization, Quantum Leap metrics capture, Efficiency Agent rollout readiness, or ARI Nomination Process clarity. Document your OU's current position on each.</li>
+            <li>Share a 30-day summary with both your OU leadership and your COE lead. This is not a formal report — it is a shared understanding of where you are starting from and what you will focus on first.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 5: Workstreams -->
+  <div class="section" id="workstreams">
+    <h2><span class="section-number">5</span> Ongoing Responsibilities by Workstream</h2>
+
+    <div class="workstream-list">
+      <div class="workstream-item">
+        <h4>Operations</h4>
+        <p>Monitor time-to-scope metrics for your OU. Where are deals stalling between Stage 2 and Stage 4? Help the field understand the standard and identify systemic blockers. Feed observations into COE process improvement cycles.</p>
+      </div>
+      <div class="workstream-item teal">
+        <h4>Commercial Architecture</h4>
+        <p>Coach field teams on deal structuring, packaged offer selection, and fixed-fee vs. T-and-M decisions. Track delivered-to-bid margin variance. Flag patterns that suggest scoping underestimation or commercial risk early, not after the project starts.</p>
+      </div>
+      <div class="workstream-item purple">
+        <h4>Solution and Delivery Design</h4>
+        <p>Review complex SOWs before they advance past Stage 3. Focus on scope clarity, assumption quality, and risk identification. Measure asset reuse: are field teams building from standardized blocks or starting from scratch? Drive adoption without mandating.</p>
+      </div>
+      <div class="workstream-item orange">
+        <h4>Practice and Domain Overlay</h4>
+        <p>Serve as a bridge between OU generalists and COE domain specialists. When a deal requires deep expertise the field does not have on hand, route it quickly and clearly. Capture patterns in where domain gaps recur — this is structural signal for the COE.</p>
+      </div>
+      <div class="workstream-item green">
+        <h4>Agentic Enablement and Insights</h4>
+        <p>Introduce and support adoption of COE-developed Efficiency Agents, starting with the Risk Assessment Agent. Capture Quantum Leap Scoping metrics from qualifying engagements. Help the field understand what the tool does, when to use it, and what it does not replace. Address tool proliferation concerns directly by providing honest guidance on which tools to use when.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 6: Field Intelligence -->
+  <div class="section" id="intelligence">
+    <h2><span class="section-number">6</span> How to Surface Field Intelligence Back to the COE</h2>
+
+    <p>Field intelligence is one of the most valuable outputs of this role. Capturing it systematically requires discipline.</p>
+
+    <div class="intel-grid">
+      <div class="intel-card">
+        <h4>After every Tier 2 and Tier 3 meeting</h4>
+        <p>Document the top two or three pieces of field signal: friction points, guidance gaps, tool confusion, or emerging deal patterns. Use a consistent format and route it to your COE lead within 24 hours.</p>
+      </div>
+      <div class="intel-card" style="background: var(--sf-teal-light);">
+        <h4>Flag systemic vs. one-off issues</h4>
+        <p>If one EM struggled with a packaged offer selection, that may be a training issue. If three EMs in the same quarter struggled with it, that is a standards or tooling problem. Identify which is which.</p>
+      </div>
+      <div class="intel-card" style="background: var(--sf-purple-light);">
+        <h4>Translate, do not just transcribe</h4>
+        <p>The COE does not need raw field complaints — it needs analyzed signal. Before surfacing an issue, ask: is this a process problem, a tooling problem, a guidance problem, or a change management problem? Framing it correctly determines what the COE can do about it.</p>
+      </div>
+      <div class="intel-card" style="background: var(--sf-green-light);">
+        <h4>Maintain a living field friction log</h4>
+        <p>Update it regularly, share quarterly summaries with the COE, and close the loop with the field when something they raised has been addressed. Closing the loop is how you earn continued candor.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 7: What We Don't Do -->
+  <div class="section" id="dont">
+    <h2><span class="section-number">7</span> What We Do Not Do</h2>
+
+    <div class="dont-list">
+      <div class="dont-item">
+        <div class="dont-icon">✕</div>
+        <div class="dont-content">
+          <strong>Show up as the standards police</strong>
+          <p>If a field team only hears from you when something is out of compliance, you will never build the trust that makes this role work. Lead every engagement with help, not audit.</p>
+        </div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">✕</div>
+        <div class="dont-content">
+          <strong>Prioritize COE reporting over field value</strong>
+          <p>Your primary customer is the OU. If the field does not experience measurable value from working with you, the reporting you send back to the COE is meaningless. Sequence accordingly.</p>
+        </div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">✕</div>
+        <div class="dont-content">
+          <strong>Try to deprecate legacy tools without a replacement</strong>
+          <p>The field knows that some legacy systems cannot be turned off. Acknowledge the constraint. Focus your energy on adoption of new tools in parallel, and let deprecation resolve over time through demonstrated superior utility.</p>
+        </div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">✕</div>
+        <div class="dont-content">
+          <strong>Treat every deal the same</strong>
+          <p>Global standards are defaults, not mandates in every situation. Know which standards have flex and which do not. Be clear with the field about the difference. Consistency does not mean uniformity.</p>
+        </div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">✕</div>
+        <div class="dont-content">
+          <strong>Disappear between cadence calls</strong>
+          <p>The tiered cadence is the anchor, not the ceiling of engagement. Be available for deal-level questions in real time. The field should experience you as a colleague, not a scheduled resource.</p>
+        </div>
+      </div>
+      <div class="dont-item">
+        <div class="dont-icon">✕</div>
+        <div class="dont-content">
+          <strong>Fail to close the loop on field signal</strong>
+          <p>If the field raises a problem and never hears back, they stop raising problems. Every systemic issue you escalate to the COE should come back to the field in some form — even if the answer is: we heard this, here is why it is hard to fix, here is what we are doing instead.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Global PS COE &nbsp;·&nbsp; COE Advisor Engagement Playbook &nbsp;·&nbsp; FY27
+</footer>
+
+</body>
+</html>
